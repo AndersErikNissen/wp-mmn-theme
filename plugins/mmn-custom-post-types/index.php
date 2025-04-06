@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name: MMN - Custom post types
- * Description: This plugin will create custom post types for the MMN Theme.
+ * Description: This plugin will create custom post types for the MMN WP Theme.
  * Version: 1.0
  */
 
@@ -20,19 +20,6 @@ function generate_custom_post_types() {
     )   
   );
 
-  register_post_type('product', 
-    array(
-      'labels' => array(
-        'name'          => __('Products', 'textdomain'),
-        'singular_name' => __('Product', 'textdomain'),
-      ),
-      'public'       => true,
-      'has_archive'  => true,
-      'show_in_rest' => true,
-      'rest_base'    => 'products'
-    )   
-  );
-
   register_post_type('collection', 
     array(
       'labels' => array(
@@ -42,7 +29,20 @@ function generate_custom_post_types() {
       'public'       => true,
       'has_archive'  => true,
       'show_in_rest' => true,
-      'rest_base'    => 'collections',
+      'rest_base'    => 'collections'
+    )   
+  );
+
+  register_post_type('product', 
+    array(
+      'labels' => array(
+        'name'          => __('Products', 'textdomain'),
+        'singular_name' => __('Product', 'textdomain'),
+      ),
+      'public'       => true,
+      'has_archive'  => true,
+      'show_in_rest' => true,
+      'rest_base'    => 'products',
     )   
   );
 }
