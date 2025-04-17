@@ -21,31 +21,17 @@ function generate_custom_post_types() {
     )   
   );
 
-  register_post_type('collection', 
+  register_post_type('art', 
     array(
       'labels' => array(
-        'name'          => __('Collections', 'textdomain'),
-        'singular_name' => __('Collection', 'textdomain'),
+        'name'          => __('Art', 'textdomain'),
+        'singular_name' => __('Art', 'textdomain'),
       ),
       'public'       => true,
       'has_archive'  => true,
       'show_in_rest' => true,
-      'menu_icon'    => 'dashicons-tickets',
-      'rest_base'    => 'collections'
-    )   
-  );
-
-  register_post_type('product', 
-    array(
-      'labels' => array(
-        'name'          => __('Products', 'textdomain'),
-        'singular_name' => __('Product', 'textdomain'),
-      ),
-      'public'       => true,
-      'has_archive'  => true,
-      'show_in_rest' => true,
-      'menu_icon'    => 'dashicons-tag',
-      'rest_base'    => 'products',
+      'menu_icon'    => 'dashicons-art',
+      'rest_base'    => 'art',
     )   
   );
 }
