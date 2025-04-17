@@ -1,0 +1,32 @@
+#Header {
+  padding: 14px var(--site-margin);
+}
+
+#Header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#Header-icon {
+  display: inline-block;
+  width: 60px;
+}
+
+#Header-icon svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+#Header-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 60px;
+}
+
+#Header-row .menu-item {
+  flex-shrink: 0;
+  font-weight: 300;
+  font-size: 5rem;
+}
