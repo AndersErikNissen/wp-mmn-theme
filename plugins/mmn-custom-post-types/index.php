@@ -16,6 +16,7 @@ function generate_custom_post_types() {
       'public'       => true,
       'has_archive'  => true,
       'show_in_rest' => true,
+      'menu_icon'    => 'dashicons-button',
       'rest_base'    => 'cases'
     )   
   );
@@ -29,6 +30,7 @@ function generate_custom_post_types() {
       'public'       => true,
       'has_archive'  => true,
       'show_in_rest' => true,
+      'menu_icon'    => 'dashicons-tickets',
       'rest_base'    => 'collections'
     )   
   );
@@ -42,6 +44,7 @@ function generate_custom_post_types() {
       'public'       => true,
       'has_archive'  => true,
       'show_in_rest' => true,
+      'menu_icon'    => 'dashicons-tag',
       'rest_base'    => 'products',
     )   
   );
