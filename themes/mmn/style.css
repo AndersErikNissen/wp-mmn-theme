@@ -29,6 +29,12 @@
   --color-light: rgba(255, 255, 255, 1);
 }
 
+.site-width {
+  max-width: 1900px;
+  margin: 0 auto;
+  padding: 0 var(--site-margin);
+}
+
 @media (max-width: 979px) {
   :root {
     --site-margin: 16px;
@@ -42,6 +48,62 @@ html {
 body {
   font-family: "Inter", Arial, Helvetica, sans-serif;
   font-weight: 400;
+}
+
+.h1,
+.h2,
+.h3 {
+  line-height: 1.35;
+  font-weight: 300;
+}
+
+.h1 {
+  font-size: 11rem;
+}
+
+.h2 {
+  font-size: 8px;
+}
+
+.h3 {
+  font-size: 5rem;
+}
+
+.rte,
+.rte-small,
+.rte p,
+.rte-small p {
+  line-height: 1.55;
+  font-weight: 400;
+}
+
+.rte a,
+.rte-small a {
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.rte {
+  font-size: 5rem;
+}
+
+.rte-small {
+  font-size: 4rem;
+}
+
+.link,
+.link-large {
+  font-size: 8rem;
+  font-weight: 400;
+  text-decoration: underline;
+}
+
+.link {
+  font-size: 4rem;
+}
+
+.link-large {
+  font-size: 8rem;
 }
 
 .pos\:rel {
@@ -61,6 +123,45 @@ body {
   z-index: 1;
 }
 
+.ratio-container {
+  position: relative;
+}
+
+.ratio-container::before {
+  content: "";
+  display: block;
+  height: 0;
+  width: 100%;
+  padding-top: var(--ratio, 100%);
+}
+
+.ratio-container > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.justify\:end {
+  justify-content: flex-end;
+}
+
+.section {
+  margin: 120px 0;
+}
+
+.sxs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.sxs-item {
+  flex: 0 0 calc(50% - 20px);
+}
+
 @media (min-width: 980px) {
   .mobile\:only {
     display: none;
@@ -70,5 +171,9 @@ body {
 @media (max-width: 979px) {
   .desktop\:only {
     display: none;
+  }
+
+  .sxs-item {
+    flex: 0 0 100%;
   }
 }

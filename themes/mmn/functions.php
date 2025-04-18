@@ -25,8 +25,18 @@ add_action('after_setup_theme', 'base_theme_features');
 function add_excerpts()
 {
   add_post_type_support('page', 'excerpt');
+  add_post_type_support('post', 'excerpt');
+  add_post_type_support('case', 'excerpt');
+  add_post_type_support('art', 'excerpt');
 }
 add_action('init', 'add_excerpts');
+
+function register_styles()
+{
+  wp_register_style( 'front-page', get_theme_file_uri( 'assets/css/front-page.css' ) );
+  wp_register_style( 'content-page-hero', get_theme_file_uri( 'assets/css/content-page-hero.css' ) );
+}
+add_action('init', 'register_styles');
 
 function header_styles() 
 {
@@ -39,7 +49,6 @@ add_action('wp_enqueue_scripts', 'header_styles');
 
 function footer_styles() 
 {
-  
 }
 add_action('get_footer', 'footer_styles');
 
@@ -54,4 +63,11 @@ function footer_scripts()
   wp_enqueue_script( 'mobile-menu', get_theme_file_uri( 'assets/js/mobile-menu.js' ), array(), "1.0", TRUE );
 }
 add_action('get_footer', 'footer_scripts');
+
+function custom_image_sizes()
+{
+  add_image_size( 'small-medium', 768);
+  add_image_size( 'medium-large', 1920);
+}
+add_action('after_setup_theme', 'custom_image_sizes');
 

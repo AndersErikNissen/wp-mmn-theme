@@ -1,0 +1,10 @@
+.content-page-hero {
+  margin-top: 15vh;
+}
+
+.content-page-hero-links {
+  margin-top: 60px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px var(--site-margin);
+}

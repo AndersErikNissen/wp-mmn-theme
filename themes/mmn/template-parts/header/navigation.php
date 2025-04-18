@@ -1,5 +1,5 @@
 <header id="Header">
-  <nav id="Header-content">
+  <nav id="Header-content" class="site-width">
     <div id="Header-icon" class="pos:rel">
       <?php get_template_part( 'template-parts/parts/logo' ); ?>
       <a class="pos:abs-cover" href="/"></a>

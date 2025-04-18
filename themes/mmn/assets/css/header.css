@@ -1,8 +1,8 @@
 #Header {
-  padding: 14px var(--site-margin);
+  padding: 14px 0;
   position: sticky;
   left: 0;
-  top: -81px;
+  top: 0;
   z-index: 10;
 }
 
@@ -33,6 +33,11 @@
   flex-shrink: 0;
   font-weight: 300;
   font-size: 5rem;
+}
+
+.header-row .menu-item:hover a,
+.header-row .current_page_item {
+  text-decoration: underline;
 }
 
 .js-mobile-menu-btn {
@@ -101,7 +106,6 @@ body:not(.mobile-menu-open) .js-mobile-menu {
 @media (max-width: 979px) {
   #Header {
     padding: 12px var(--site-margin);
-    top: -59.33px;
   }
 
   #Header-icon {

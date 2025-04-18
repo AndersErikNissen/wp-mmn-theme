@@ -8,9 +8,9 @@
   </head>
   <body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
-    <div id="page">
+    <div id="Page">
       <?php get_template_part( 'template-parts/header/navigation' ); ?>
-      <main id="content">
+      <main id="Content">
 
 
 

@@ -1,6 +1,6 @@
 <?php
   get_header();
 
-  // Code goes here...
+  get_template_part( 'template-parts/content/content-page-hero' );
 
   get_footer();
