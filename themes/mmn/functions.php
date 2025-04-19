@@ -26,8 +26,6 @@ function add_excerpts()
 {
   add_post_type_support('page', 'excerpt');
   add_post_type_support('post', 'excerpt');
-  add_post_type_support('case', 'excerpt');
-  add_post_type_support('art', 'excerpt');
 }
 add_action('init', 'add_excerpts');
 

@@ -3,9 +3,15 @@
     wp_enqueue_style( 'content-page-hero' ); 
   endif;
 
-  $email = get_field( 'email' );
-  $link = get_field( 'link' ); 
-  $image = get_field( 'image' ); 
+  // Used with front-page.php
+  $path = "";
+  if ( get_field( 'section_hero' ) ) : 
+    $path = "section_hero_";
+  endif;
+
+  $email = get_field( $path . 'email' );
+  $link = get_field( $path . 'link' ); 
+  $image = get_field( $path . 'image' );   
 ?>
 
 <section class="content-page-hero section">
@@ -34,7 +40,7 @@
         <div class="sxs-item">
           <div class="ratio-container">
             <?php echo wp_get_attachment_image( $image, 'large', false, array(
-              'sizes' => '(min-width: 980) 50vw, 100vw'
+              'sizes' => '(max-width: 979px) 100vw, (max-width: 1899px) 50vw, 950px'
             ) ); ?>
           </div>
         </div>

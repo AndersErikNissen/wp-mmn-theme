@@ -62,7 +62,7 @@ body {
 }
 
 .h2 {
-  font-size: 8px;
+  font-size: 8rem;
 }
 
 .h3 {
@@ -144,6 +144,10 @@ body {
   object-fit: cover;
 }
 
+.ratio\:half {
+  --ratio: 50%;
+}
+
 .justify\:end {
   justify-content: flex-end;
 }
@@ -160,6 +164,10 @@ body {
 
 .sxs-item {
   flex: 0 0 calc(50% - 20px);
+}
+
+.sxs-item-full {
+  flex: 0 0 100%;
 }
 
 @media (min-width: 980px) {

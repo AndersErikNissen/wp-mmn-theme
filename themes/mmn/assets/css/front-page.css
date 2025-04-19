@@ -1,3 +1,17 @@
-.front-page-content-link {
+.front-page-intro-link {
   margin-top: 20px;
+}
+
+.front-page-case-title {
+  margin-top: 16px;
+}
+
+.front-page-section-header {
+  margin-bottom: 20px;
+}
+
+.front-page-section-btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
