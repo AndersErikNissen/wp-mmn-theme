@@ -18,7 +18,10 @@ function generate_custom_post_types() {
       'show_in_rest' => true,
       'menu_icon'    => 'dashicons-button',
       'rest_base'    => 'cases',
-      'supports'     => array( 'editor', 'title', 'excerpt', 'thumbnail', 'custom-fields' )
+      'supports'     => array( 'editor', 'title', 'excerpt', 'thumbnail', 'custom-fields' ),
+      'rewrite'      => array(
+        'slug' => 'cases'
+      )
     )   
   );
 

@@ -52,7 +52,8 @@ body {
 
 .h1,
 .h2,
-.h3 {
+.h3,
+.h4 {
   line-height: 1.35;
   font-weight: 300;
 }
@@ -67,6 +68,10 @@ body {
 
 .h3 {
   font-size: 5rem;
+}
+
+.h4 {
+  font-size: 4rem;
 }
 
 .rte,
@@ -142,10 +147,6 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.ratio\:half {
-  --ratio: 50%;
 }
 
 .justify\:end {

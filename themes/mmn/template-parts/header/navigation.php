@@ -7,7 +7,7 @@
     <?php wp_nav_menu( array(
       'menu_class' => 'header-row desktop:only',
       'container'  => false
-      ) ); ?>
+    ) ); ?>
 
     <div class="js-mobile-menu-btn mobile:only"></div>
   </nav>

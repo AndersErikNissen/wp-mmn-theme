@@ -1,0 +1,13 @@
+.content-page-posts-post-title {
+  margin-top: 16px;
+}
+
+.content-page-posts-header {
+  margin-bottom: 20px;
+}
+
+.content-page-posts-btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}

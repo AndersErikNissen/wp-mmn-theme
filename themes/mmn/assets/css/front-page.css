@@ -2,16 +2,16 @@
   margin-top: 20px;
 }
 
-.front-page-case-title {
-  margin-top: 16px;
+.front-page-cases,
+.front-page-art {
+  margin-top: 240px;
 }
 
-.front-page-section-header {
-  margin-bottom: 20px;
+.front-page-cases .content-page-posts-post-count-0 {
+  --ratio: 50%;
+  flex: 0 0 100%;
 }
 
-.front-page-section-btn {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
+.front-page-art .content-page-posts-post {
+  flex: 0 0 calc((100% - 120px) / 4);
 }
