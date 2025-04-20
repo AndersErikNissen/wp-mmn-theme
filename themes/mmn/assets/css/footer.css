@@ -29,3 +29,15 @@
 .footer-label {
   margin-bottom: 6px;
 }
+
+.footer-copyright {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 3rem;
+  margin-top: 40px;
+}
+
+.footer-copyright span {
+  line-height: 1;
+}
