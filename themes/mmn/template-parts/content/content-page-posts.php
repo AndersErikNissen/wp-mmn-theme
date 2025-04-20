@@ -10,11 +10,8 @@
    */
 
   $posts = $args['posts'];
-
+  
   if( $posts ) : 
-    if ( !wp_style_is( 'content-page-posts' ) ) :
-      wp_enqueue_style( 'content-page-posts' ); 
-    endif;
     $count = 0;
   ?>
     <section class="content-page-posts section <?php if ( $args['class'] ) { echo $args['class']; }; ?>">
@@ -46,12 +43,12 @@
                   <?php if ( has_post_thumbnail( get_the_ID() ) ) : 
                     echo wp_get_attachment_image( get_post_thumbnail_id(), 'large', false, array( 'sizes' => $sizes ) ); 
                   endif; ?>
-                  <?php if ( get_post_type() !== 'art' ) : ?>
+                  <?php if ( get_post_type() !== 'kunst' ) : ?>
                     <a class="pos:abs-cover" href="<?php echo get_permalink(); ?>"></a>
                   <?php endif; ?>
                 </div>
 
-                <?php if ( get_post_type() !== 'art' ) : ?>
+                <?php if ( get_post_type() !== 'kunst' ) : ?>
                   <p class="content-page-posts-post-title h3">
                     <a href="<?php echo get_permalink(); ?>">
                       <?php echo get_the_title(); ?>

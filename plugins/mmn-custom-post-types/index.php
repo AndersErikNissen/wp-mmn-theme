@@ -25,17 +25,17 @@ function generate_custom_post_types() {
     )   
   );
 
-  register_post_type('art', 
+  register_post_type('kunst', 
     array(
       'labels' => array(
-        'name'          => __('Art', 'textdomain'),
-        'singular_name' => __('Art', 'textdomain'),
+        'name'          => __('Kunst', 'textdomain'),
+        'singular_name' => __('Kunst', 'textdomain'),
       ),
       'public'       => true,
       'has_archive'  => true,
       'show_in_rest' => true,
       'menu_icon'    => 'dashicons-art',
-      'rest_base'    => 'art',
+      'rest_base'    => 'kunst',
       'supports'     => array( 'editor', 'title', 'excerpt', 'thumbnail', 'custom-fields' )
     )   
   );

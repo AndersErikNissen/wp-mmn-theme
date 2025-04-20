@@ -43,10 +43,10 @@
   ));
 
   get_template_part('template-parts/content/content-page-posts', null, array(
-    'posts' => get_field( 'section_art' )['art'],
+    'posts' => get_field( 'section_kunst' )['kunst'],
     'class' => 'front-page-art',
-    'title' => get_field( 'section_art' )['title'],
-    'link'  => get_post_type_archive_link( 'art' ),
+    'title' => get_field( 'section_kunst' )['title'],
+    'link'  => get_post_type_archive_link( 'kunst' ),
     'limit' => 4,
     'sizes' => '(max-width: 979px) 50vw, (max-width: 1899px) 25vw, 475px'
   ));

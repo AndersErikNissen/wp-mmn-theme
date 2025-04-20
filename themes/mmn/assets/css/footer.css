@@ -1,0 +1,31 @@
+#Footer {
+  padding: 120px 0 40px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.footer-row .menu-item {
+  flex-shrink: 0;
+  font-weight: 300;
+  font-size: 4rem;
+}
+
+.footer-contact-links {
+  display: flex;
+  gap: 12px 24px;
+  flex-wrap: wrap;
+}
+
+.footer-label {
+  margin-bottom: 6px;
+}

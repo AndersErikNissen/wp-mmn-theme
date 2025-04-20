@@ -97,14 +97,18 @@ body {
 }
 
 .link,
+.link-medium,
 .link-large {
-  font-size: 8rem;
   font-weight: 400;
   text-decoration: underline;
 }
 
 .link {
   font-size: 4rem;
+}
+
+.link-medium {
+  font-size: 5rem;
 }
 
 .link-large {
