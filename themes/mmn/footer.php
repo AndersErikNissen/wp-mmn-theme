@@ -21,7 +21,7 @@
             </div>
 
             <?php wp_nav_menu( array(
-              'menu_class' => 'footer-row desktop:only',
+              'menu_class' => 'footer-row',
               'container'  => false
             ) ); ?>
           </div>

@@ -8,3 +8,17 @@
   flex-wrap: wrap;
   gap: 20px var(--site-margin);
 }
+
+@media (max-width: 979px) {
+  .content-page-hero:not(:only-child) {
+    margin-bottom: 120px;
+  }
+
+  .content-page-hero .sxs {
+    gap: 40px;
+  }
+
+  .content-page-hero-links {
+    margin-top: 30px;
+  }
+}

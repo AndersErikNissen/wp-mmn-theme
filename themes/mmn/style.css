@@ -115,6 +115,18 @@ body {
   font-size: 8rem;
 }
 
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-item-content {
+  line-height: 1.35;
+  font-size: 4rem;
+  font-weight: 400;
+}
+
 .pos\:rel {
   position: relative;
 }
@@ -182,8 +194,48 @@ body {
 }
 
 @media (max-width: 979px) {
+  .h1 {
+    font-size: 9rem;
+  }
+
+  .h2 {
+    font-size: 7rem;
+  }
+
+  .h3 {
+    font-size: 5rem;
+  }
+
+  .h4 {
+    font-size: 3.5rem;
+  }
+
+  .rte {
+    font-size: 4rem;
+  }
+
+  .rte-small {
+    font-size: 3.5rem;
+  }
+
+  .link-medium {
+    font-size: 4rem;
+  }
+
+  .link-large {
+    font-size: 5rem;
+  }
+
+  .section {
+    margin: 60px 0;
+  }
+
   .desktop\:only {
     display: none;
+  }
+
+  .sxs {
+    gap: 20px;
   }
 
   .sxs-item {

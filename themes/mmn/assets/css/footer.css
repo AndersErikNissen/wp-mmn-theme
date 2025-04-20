@@ -6,6 +6,7 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  gap: 40px;
 }
 
 .footer-row {
@@ -18,6 +19,11 @@
   flex-shrink: 0;
   font-weight: 300;
   font-size: 4rem;
+}
+
+.footer-row .menu-item:hover a,
+.footer-row .current_page_item a {
+  text-decoration: underline;
 }
 
 .footer-contact-links {
@@ -40,4 +46,22 @@
 
 .footer-copyright span {
   line-height: 1;
+}
+
+@media (max-width: 979px) {
+  #Footer {
+    padding: 40px 0;
+  }
+
+  .footer-content {
+    flex-direction: column;
+  }
+
+  .footer-row .menu-item {
+    font-size: 3.5rem;
+  }
+
+  .footer-row {
+    gap: 20px;
+  }
 }

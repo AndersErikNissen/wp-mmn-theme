@@ -1,10 +1,6 @@
 <?php
   get_header();
 
-  if ( !wp_style_is( 'front-page' ) ) :
-    wp_enqueue_style( 'front-page' ); 
-  endif;
-
   get_template_part( 'template-parts/content/content-page-hero' );
 ?>
 

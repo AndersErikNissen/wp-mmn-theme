@@ -6,8 +6,25 @@
   margin-bottom: 20px;
 }
 
+.content-page-posts-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.content-page-posts-btn {
+  flex-shrink: 0;
+}
+
 .content-page-posts-btn {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+}
+
+@media (max-width: 979px) {
+  .content-page-posts-post-title {
+    margin-top: 8px;
+  }
 }

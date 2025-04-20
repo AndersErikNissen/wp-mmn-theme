@@ -7,11 +7,24 @@
   margin-top: 240px;
 }
 
-.front-page-cases .content-page-posts-post-count-0 {
-  --ratio: 50%;
-  flex: 0 0 100%;
+@media (min-width: 980px) {
+  .front-page-cases .content-page-posts-post-count-0 {
+    --ratio: 50%;
+    flex: 0 0 100%;
+  }
 }
 
 .front-page-art .content-page-posts-post {
   flex: 0 0 calc((100% - 120px) / 4);
+}
+
+@media (max-width: 979px) {
+  .front-page-cases,
+  .front-page-art {
+    margin-top: 80px;
+  }
+
+  .front-page-art .content-page-posts-post {
+    flex: 0 0 calc((100% - 20px) / 2);
+  }
 }

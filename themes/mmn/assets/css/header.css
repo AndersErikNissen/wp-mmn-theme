@@ -104,10 +104,6 @@ body:not(.mobile-menu-open) .js-mobile-menu {
 }
 
 @media (max-width: 979px) {
-  #Header {
-    padding: 12px var(--site-margin);
-  }
-
   #Header-icon {
     width: 40px;
   }

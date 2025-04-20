@@ -17,10 +17,10 @@
     <section class="content-page-posts section <?php if ( $args['class'] ) { echo $args['class']; }; ?>">
       <div class="site-width">
         <div class="content-page-posts-content">
-          <div class="content-page-posts-header sxs">
-            <h2 class="h2 sxs-item"><?php if ( $args['title'] ) { echo $args['title']; }; ?></h2>
+          <div class="content-page-posts-header">
+            <h2 class="content-page-posts-title h2"><?php if ( $args['title'] ) { echo $args['title']; }; ?></h2>
             <?php if ( isset( $args['link'] ) ) : ?>
-              <a class="content-page-posts-btn link sxs-item" href="<?php echo $args['link']; ?>">Se alle</a>
+              <a class="content-page-posts-btn link" href="<?php echo $args['link']; ?>">Se alle</a>
             <?php endif; ?>
           </div>
 

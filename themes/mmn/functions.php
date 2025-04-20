@@ -62,7 +62,12 @@ function header_styles()
   wp_enqueue_style( 'footer', get_theme_file_uri( 'assets/css/footer.css' ) );
   wp_enqueue_style( 'style', get_theme_file_uri( 'style.css' ) );
   
+  if ( get_post()->ID === get_page_by_path( 'om-mig' )->ID ) {
+    wp_enqueue_style( 'about', get_theme_file_uri( 'about.css' ) );
+  }
+
   if ( is_front_page() ) {
+    wp_enqueue_style( 'front-page', get_theme_file_uri( 'front-page.css' ) );
     wp_enqueue_style( 'content-page-posts', get_theme_file_uri( 'content-page-posts.css' ) );
   }
   
