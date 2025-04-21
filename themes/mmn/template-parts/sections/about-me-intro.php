@@ -1,27 +1,24 @@
-<section class="about-hero section">
-  <div class="site-width">
-    <div class="sxs">
-      <div class="sxs-item">
-        <h1 class="h1"><?php echo get_the_title(); ?></h1>
-      </div>
-    </div>
-  </div>
-</section>
-
 <?php 
   $birthdate = new DateTime( '1996-08-01' );
   $now = new DateTime();
   $age = $now->diff( $birthdate );
 ?>
 
-<section class="about-intro section">
+<section class="about-me-intro section">
   <div class="site-width">
     <div class="sxs">
-      <div class="about-intro-info-items sxs-item">
+      <div class="about-me-intro-info-items sxs-item">
         <div class="info-item">
           <p class="h4">Alder</p>
           <p class="info-item-content"><?php echo $age->y ?></p>
         </div>
+        
+        <?php if ( get_field( 'section_intro_location' ) ) : ?>
+          <div class="info-item">
+            <p class="h4">Lokation</p>
+            <p class="info-item-content"><?php echo get_field( 'section_intro_location' ) ?></p>
+          </div>
+        <?php endif; ?>
         
         <?php if ( get_field( 'section_intro_education' ) ) : ?>
           <div class="info-item">
@@ -43,7 +40,7 @@
         ?>
           <div class="info-item">
             <p class="h4">Interesser</p>
-            <div class="info-item-content about-intro-interests-items">
+            <div class="info-item-content about-me-intro-interests-items">
               <?php 
                 $interests = explode( '/', $interests );
                 $count = 0;
@@ -60,12 +57,12 @@
       </div>
 
       <div class="sxs-item">
-        <div class="about-intro-content rte">
+        <div class="about-me-intro-content rte">
           <?php the_content(); ?>
         </div>
 
         <?php if ( get_field( 'section_intro_extra_content' ) ) : ?>
-          <div class="about-intro-extra-content rte-small">
+          <div class="about-me-intro-extra-content rte-small">
             <?php the_field( 'section_intro_extra_content' ) ?>
           </div>
         <?php endif; ?>

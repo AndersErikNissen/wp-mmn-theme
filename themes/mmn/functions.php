@@ -47,14 +47,6 @@ function add_excerpts()
 }
 add_action('init', 'add_excerpts');
 
-function register_styles()
-{
-  wp_register_style( 'front-page', get_theme_file_uri( 'assets/css/front-page.css' ) );
-  wp_register_style( 'content-page-hero', get_theme_file_uri( 'assets/css/content-page-hero.css' ) );
-  wp_register_style( 'content-page-posts', get_theme_file_uri( 'assets/css/content-page-posts.css' ) );
-}
-add_action('init', 'register_styles');
-
 function header_styles() 
 {
   wp_enqueue_style( 'reset', get_theme_file_uri( 'assets/css/reset.css' ) );
@@ -62,28 +54,27 @@ function header_styles()
   wp_enqueue_style( 'footer', get_theme_file_uri( 'assets/css/footer.css' ) );
   wp_enqueue_style( 'style', get_theme_file_uri( 'style.css' ) );
   
-  if ( get_post()->ID === get_page_by_path( 'om-mig' )->ID ) {
-    wp_enqueue_style( 'about', get_theme_file_uri( 'about.css' ) );
-  }
+  if ( get_post() ) {
+    if ( get_post()->ID === get_page_by_path( 'om-mig' )->ID ) {
+      wp_enqueue_style( 'about-me', get_theme_file_uri( 'assets/css/about-me.css' ) );
+      wp_enqueue_style( 'drop-down', get_theme_file_uri( 'assets/css/drop-down.css' ) );
+    }
 
-  if ( is_front_page() ) {
-    wp_enqueue_style( 'front-page', get_theme_file_uri( 'front-page.css' ) );
-    wp_enqueue_style( 'content-page-posts', get_theme_file_uri( 'content-page-posts.css' ) );
-  }
+    if ( is_front_page() ) {
+      wp_enqueue_style( 'front-page', get_theme_file_uri( 'assets/css/front-page.css' ) );
+      wp_enqueue_style( 'content-page-posts', get_theme_file_uri( 'assets/css/content-page-posts.css' ) );
+    }
   
-  if ( is_front_page() || get_post()->ID === get_page_by_path( 'kontakt' )->ID ) {
-    wp_enqueue_style( 'content-page-hero', get_theme_file_uri( 'content-page-hero.css' ) );
+    if ( is_front_page() || get_post()->ID === get_page_by_path( 'kontakt' )->ID ) {
+      wp_enqueue_style( 'content-page-hero', get_theme_file_uri( 'assets/css/content-page-hero.css' ) );
+    }
   }
 }
 add_action('wp_enqueue_scripts', 'header_styles');
 
-function footer_styles() 
-{
-}
-add_action('get_footer', 'footer_styles');
-
 function footer_scripts() 
 {
   wp_enqueue_script( 'mobile-menu', get_theme_file_uri( 'assets/js/mobile-menu.js' ), array(), "1.0", TRUE );
+  wp_enqueue_script( 'drop-down', get_theme_file_uri( 'assets/js/drop-down.js' ), array(), "1.0", TRUE );
 }
 add_action('get_footer', 'footer_scripts');

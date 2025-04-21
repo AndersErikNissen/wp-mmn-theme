@@ -165,6 +165,10 @@ body {
   object-fit: cover;
 }
 
+.ratio-16\:9 {
+  --ratio: 56.25%;
+}
+
 .justify\:end {
   justify-content: flex-end;
 }
