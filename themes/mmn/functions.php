@@ -69,6 +69,14 @@ function header_styles()
       wp_enqueue_style( 'content-page-hero', get_theme_file_uri( 'assets/css/content-page-hero.css' ) );
     }
   }
+
+  if ( is_post_type_archive( 'case' ) ) {
+    wp_enqueue_style( 'cases', get_theme_file_uri( 'assets/css/cases.css' ) );
+  }
+
+  if ( get_post_type( get_the_ID() ) == 'case' ) {
+    wp_enqueue_style( 'cases', get_theme_file_uri( 'assets/css/case.css' ) );
+  }
 }
 add_action('wp_enqueue_scripts', 'header_styles');
 

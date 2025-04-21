@@ -1,0 +1,10 @@
+@media (min-width: 980px) {
+  .cases-case {
+    --ratio: 125%;
+    flex: 0 0 calc((100% - 80px) / 3);
+  }
+}
+
+.cases-case-title {
+  margin-top: 12px;
+}

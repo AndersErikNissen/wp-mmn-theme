@@ -1,6 +1,6 @@
 <?php
   get_header();
 
-  // Code goes here...
+  echo "404";
 
   get_footer();
