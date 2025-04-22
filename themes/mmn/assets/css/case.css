@@ -6,3 +6,21 @@
   --ratio: 50%;
   margin-top: 60px;
 }
+
+.case-info-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.case-image-wide {
+  --ratio: 50%;
+  flex: 0 0 100%;
+}
+
+
+.case-info-item-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+}
