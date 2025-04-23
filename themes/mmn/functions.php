@@ -75,6 +75,10 @@ function header_styles()
   }
 
   if ( get_post_type( get_the_ID() ) == 'case' ) {
+    if ( is_single() ) {
+      wp_enqueue_style( 'content-page-posts', get_theme_file_uri( 'assets/css/content-page-posts.css' ) );
+    }
+    
     wp_enqueue_style( 'cases', get_theme_file_uri( 'assets/css/case.css' ) );
   }
 }
