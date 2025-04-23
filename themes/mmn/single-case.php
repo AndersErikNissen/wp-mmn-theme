@@ -74,9 +74,9 @@
                 $tools = explode( '/', $tools );
                 $count = 0;
 
-                foreach ( $tools as $interest ) {
+                foreach ( $tools as $tool ) {
                   $count++;
-                  echo '<p>' . $interest . '</p>';
+                  echo '<p>' . $tool . '</p>';
                   if ($count !== count( $tools ) ) echo '<p>/</p>';
                 }
               ?>
