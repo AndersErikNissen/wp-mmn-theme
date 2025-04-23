@@ -201,6 +201,10 @@ body {
   }
 }
 
+.backdrop\:invert {
+  backdrop-filter: invert(1);
+}
+
 @media (max-width: 979px) {
   .h1 {
     font-size: 9rem;

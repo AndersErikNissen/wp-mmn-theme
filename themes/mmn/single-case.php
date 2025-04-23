@@ -47,15 +47,15 @@
           if ( $themes ) : 
         ?>
           <div class="info-item">
-            <p class="h4">Interesser</p>
+            <p class="h4">Temaer</p>
             <div class="info-item-content case-info-item-flex">
               <?php 
                 $themes = explode( '/', $themes );
                 $count = 0;
 
-                foreach ( $themes as $interest ) {
+                foreach ( $themes as $itheme ) {
                   $count++;
-                  echo '<p>' . $interest . '</p>';
+                  echo '<p>' . $itheme . '</p>';
                   if ($count !== count( $themes ) ) echo '<p>/</p>';
                 }
               ?>

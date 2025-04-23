@@ -35,6 +35,10 @@
   font-size: 5rem;
 }
 
+.header-row .menu-item a {
+  backdrop-filter: invert(1);
+}
+
 .header-row .menu-item:hover a,
 .header-row .current_page_item {
   text-decoration: underline;
@@ -55,6 +59,7 @@
   width: 80%;
   position: absolute;
   left: 10%;
+  backdrop-filter: invert(1);
 }
 
 .js-mobile-menu-btn::before {
