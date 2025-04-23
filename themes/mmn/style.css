@@ -29,12 +29,6 @@
   --color-light: rgba(255, 255, 255, 1);
 }
 
-.site-width {
-  max-width: 1900px;
-  margin: 0 auto;
-  padding: 0 var(--site-margin);
-}
-
 @media (max-width: 979px) {
   :root {
     --site-margin: 16px;
@@ -48,6 +42,12 @@ html {
 body {
   font-family: "Inter", Arial, Helvetica, sans-serif;
   font-weight: 400;
+}
+
+.site-width {
+  max-width: 1900px;
+  margin: 0 auto;
+  padding: 0 var(--site-margin);
 }
 
 .h1,
@@ -199,10 +199,6 @@ body {
   .mobile\:only {
     display: none;
   }
-}
-
-.backdrop\:invert {
-  backdrop-filter: invert(1);
 }
 
 @media (max-width: 979px) {
