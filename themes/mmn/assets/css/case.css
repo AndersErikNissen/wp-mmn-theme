@@ -18,6 +18,17 @@
   flex: 0 0 100%;
 }
 
+.case-next-posts-header {
+  margin-bottom: 20px;
+}
+
+.case-next-posts {
+  --ratio: 125%;
+}
+
+.case-next-posts-case-title {
+  margin-top: 16px;
+}
 
 .case-info-item-flex {
   display: flex;

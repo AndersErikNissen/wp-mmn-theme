@@ -4,7 +4,7 @@
    * posts [WP_Post]        (required)
    * title [string]         (required)
    * link  [url]            (recommended)
-   * sizes [string / array] (recommended) (Fallback key NEEDS TO BE NAMED -1)
+   * sizes [string / array] (recommended) (Array: Fallback key NEEDS TO BE NAMED -1)
    * limit [integer]        (optional)
    * class [string]         (optional)
    */

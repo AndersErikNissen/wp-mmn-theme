@@ -12,7 +12,7 @@
           <?php echo the_content(); ?>
         </div>
         <?php 
-          $link = get_field( 'section_intro' )['link'];
+          $link = get_field( 'section_intro_link' );
           if( $link ) : ?>
             <div class="front-page-intro-link">
               <a class="link" href="<?php echo esc_url( $link['url'] ); ?>">
@@ -27,9 +27,9 @@
 
 <?php
   get_template_part('template-parts/content/content-page-posts', null, array(
-    'posts' => get_field( 'section_cases' )['cases'],
+    'posts' => get_field( 'section_cases_cases' ),
     'class' => 'front-page-cases',
-    'title' => get_field( 'section_cases' )['title'],
+    'title' => get_field( 'section_cases_title' ),
     'link'  => get_post_type_archive_link( 'case' ),
     'limit' => 3,
     'sizes' => array(
@@ -39,9 +39,9 @@
   ));
 
   get_template_part('template-parts/content/content-page-posts', null, array(
-    'posts' => get_field( 'section_kunst' )['kunst'],
+    'posts' => get_field( 'section_kunst_kunst' ),
     'class' => 'front-page-art',
-    'title' => get_field( 'section_kunst' )['title'],
+    'title' => get_field( 'section_kunst_title' ),
     'link'  => get_post_type_archive_link( 'kunst' ),
     'limit' => 4,
     'sizes' => '(max-width: 979px) 50vw, (max-width: 1899px) 25vw, 475px'

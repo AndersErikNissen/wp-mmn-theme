@@ -180,36 +180,57 @@
 </section>
 
 <?php 
-  $next_post = get_next_post();
+  $random_posts = new WP_Query( array(
+    'post_type' => 'case',
+    'posts_per_page' => 2,
+    'orderby' => 'rand',
+    'post__not_in' => array( get_the_ID() ),
+  ) );
+
+  $title = get_field( 'section_other_cases_title', get_page_by_path( 'options' )->ID );
+  get_template_part('template-parts/content/content-page-posts', null, array(
+    'posts' => $random_posts->posts,
+    'class' => 'case-random-cases',
+    'title' => $title,
+    'link'  => get_post_type_archive_link( 'case' ),
+    'sizes' => '(max-width: 979px) 100vw, (max-width: 1899px) 50vw, 950px',
+  ));
 ?>
 
+<!-- <?php if ( $random_posts->have_posts() ) : ?>
 <section class="case-next-posts section">
   <div class="site-width">
-    <div class="sxs">
-      <div class="case-case sxs-item">
-        <div class="ratio-container">
-          <?php if ( has_post_thumbnail( get_previous_post()->ID ) ) : 
-            echo wp_get_attachment_image( get_post_thumbnail_id( get_previous_post()->ID ), 'large', false, array( 
-              'sizes' => '(max-width: 979px) 100vw, (max-width: 1899px) 33vw, 633px' 
-            ) ); 
-          endif; ?>
-
-          <a class="pos:abs-cover" href="<?php echo get_permalink( get_previous_post()->ID ); ?>"></a>
-        </div>
-
-        <p class="cases-case-title h3">
-          <a href="<?php echo get_permalink( get_previous_post()->ID ); ?>">
-            <?php echo get_the_title( get_previous_post()->ID ); ?>
-          </a>
-        </p>
-      </div>
-      
+    <div class="case-next-posts-header sxs">
       <div class="sxs-item">
-        
+        <h2 class="h2"><?php echo $title ?: 'Andre cases'; ?></h2>
       </div>
+    </div>
+    <div class="sxs">
+      <?php 
+        while ( $random_posts->have_posts() ) : $random_posts->the_post(); ?>
+          <div class="case-next-posts-case sxs-item">
+            <div class="ratio-container">
+              <?php if ( has_post_thumbnail( get_the_ID() ) ) : 
+                echo wp_get_attachment_image( get_post_thumbnail_id( get_the_ID() ), 'large', false, array( 
+                  'sizes' => '(max-width: 979px) 100vw, (max-width: 1899px) 50vw, 950px' 
+                ) ); 
+              endif; ?>
+
+              <a class="pos:abs-cover" href="<?php echo get_permalink( get_the_ID() ); ?>"></a>
+            </div>
+
+            <p class="case-next-posts-case-title h3">
+              <a href="<?php echo get_permalink( get_the_ID() ); ?>">
+                <?php echo get_the_title( get_the_ID() ); ?>
+              </a>
+            </p>
+          </div>
+        <?php endwhile;
+        wp_reset_postdata();
+      ?>
     </div>
   </div>
 </section>
+<?php endif; -->
 
-<?php
   get_footer();

@@ -177,6 +177,10 @@ body {
   margin: 120px 0;
 }
 
+.section:last-child {
+  margin-bottom: 0;
+}
+
 .sxs {
   display: flex;
   flex-wrap: wrap;
