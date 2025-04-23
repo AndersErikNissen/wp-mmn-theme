@@ -68,7 +68,7 @@
           if ( $tools ) : 
         ?>
           <div class="info-item">
-            <p class="h4">Interesser</p>
+            <p class="h4">Værktøjer</p>
             <div class="info-item-content case-info-item-flex">
               <?php 
                 $tools = explode( '/', $tools );
