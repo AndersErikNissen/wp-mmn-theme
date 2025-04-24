@@ -9,6 +9,10 @@
   gap: 20px var(--site-margin);
 }
 
+.content-page-contact-image {
+  --ratio: 50%;
+}
+
 @media (max-width: 979px) {
   .content-page-hero:not(:only-child) {
     margin-bottom: 120px;

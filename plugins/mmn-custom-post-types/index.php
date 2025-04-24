@@ -16,12 +16,11 @@ function generate_custom_post_types() {
       'public'       => true,
       'has_archive'  => true,
       'show_in_rest' => true,
-      'menu_icon'    => 'dashicons-button',
+      'menu_icon'    => 'dashicons-clipboard',
       'rest_base'    => 'cases',
-      'supports'     => array( 'editor', 'title', 'excerpt', 'thumbnail', 'custom-fields' ),
-      'rewrite'      => array(
-        'slug' => 'cases'
-      )
+      'supports'     => array ( 'editor', 'title', 'excerpt', 'thumbnail', 'custom-fields' ),
+      'taxonomies'   => array ( 'category', 'post_tag' ),
+      'rewrite'      => array ( 'slug' => 'cases' ),
     )   
   );
 
@@ -36,7 +35,8 @@ function generate_custom_post_types() {
       'show_in_rest' => true,
       'menu_icon'    => 'dashicons-art',
       'rest_base'    => 'kunst',
-      'supports'     => array( 'editor', 'title', 'excerpt', 'thumbnail', 'custom-fields' )
+      'supports'     => array ( 'editor', 'title', 'excerpt', 'thumbnail', 'custom-fields' ),
+      'taxonomies'   => array ( 'category', 'post_tag' ),
     )   
   );
 }
