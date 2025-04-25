@@ -74,6 +74,10 @@ function header_styles()
     wp_enqueue_style( 'cases', get_theme_file_uri( 'assets/css/cases.css' ) );
   }
 
+  if ( is_post_type_archive( 'kunst' ) ) {
+    wp_enqueue_style( 'kunst', get_theme_file_uri( 'assets/css/kunst.css' ) );
+  }
+
   if ( get_post_type( get_the_ID() ) == 'case' ) {
     if ( is_single() ) {
       wp_enqueue_style( 'content-page-posts', get_theme_file_uri( 'assets/css/content-page-posts.css' ) );
@@ -87,6 +91,15 @@ add_action('wp_enqueue_scripts', 'header_styles');
 function footer_scripts() 
 {
   wp_enqueue_script( 'mobile-menu', get_theme_file_uri( 'assets/js/mobile-menu.js' ), array(), "1.0", TRUE );
-  wp_enqueue_script( 'drop-down', get_theme_file_uri( 'assets/js/drop-down.js' ), array(), "1.0", TRUE );
+
+  if ( get_post() ) {
+    if ( get_post()->ID === get_page_by_path( 'om-mig' )->ID ) {
+      wp_enqueue_script( 'drop-down', get_theme_file_uri( 'assets/js/drop-down.js' ), array(), "1.0", TRUE );
+    }
+  }
+  
+  if ( is_post_type_archive( 'kunst' ) ) {
+    wp_enqueue_script( 'kunst', get_theme_file_uri( 'assets/js/kunst.js' ), array(), "1.0", TRUE );
+  }
 }
 add_action('get_footer', 'footer_scripts');

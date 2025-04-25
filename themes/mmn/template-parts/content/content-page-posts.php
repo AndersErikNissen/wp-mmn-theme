@@ -51,7 +51,7 @@
                 <?php if ( get_post_type() !== 'kunst' ) : ?>
                   <p class="content-page-posts-post-title h3">
                     <a href="<?php echo get_permalink(); ?>">
-                      <?php echo get_the_title(); ?>
+                      <?php echo get_field('section_info_client') ?: get_the_title(); ?>
                     </a>
                   </p>
                 <?php endif; ?>

@@ -34,7 +34,7 @@
 
               <p class="cases-case-title h3">
                 <a href="<?php echo get_permalink(); ?>">
-                  <?php echo get_the_title(); ?>
+                  <?php echo get_field('section_info_client') ?: get_the_title(); ?>
                 </a>
               </p>
             </div>
