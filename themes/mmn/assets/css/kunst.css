@@ -1,8 +1,3 @@
-kunst-gallery,
-kunst-item {
-  display: block;
-}
-
 @media (min-width: 980px) {
   .kunst-items .sxs {
     gap: 20px;

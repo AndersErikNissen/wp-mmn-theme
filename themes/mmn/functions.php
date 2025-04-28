@@ -76,6 +76,7 @@ function header_styles()
 
   if ( is_post_type_archive( 'kunst' ) ) {
     wp_enqueue_style( 'kunst', get_theme_file_uri( 'assets/css/kunst.css' ) );
+    wp_enqueue_style( 'gallery', get_theme_file_uri( 'assets/css/gallery.css' ) );
   }
 
   if ( get_post_type( get_the_ID() ) == 'case' ) {
@@ -99,7 +100,7 @@ function footer_scripts()
   }
   
   if ( is_post_type_archive( 'kunst' ) ) {
-    wp_enqueue_script( 'kunst', get_theme_file_uri( 'assets/js/kunst.js' ), array(), "1.0", TRUE );
+    wp_enqueue_script( 'gallery', get_theme_file_uri( 'assets/js/gallery.js' ), array(), "1.0", TRUE );
   }
 }
 add_action('get_footer', 'footer_scripts');
