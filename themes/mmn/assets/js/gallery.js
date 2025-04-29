@@ -6,11 +6,19 @@ class TheGallery extends HTMLElement {
   }
 
   get active() {
-    return JSON.parse(this.getAttribute('active'));
+    // RENAME to toggleGallery..... get/set is not needed
+    return !!document.body.classList.contains('gallery-active');
   }
 
-  set active(v) {
-    this.setAttribute('active', JSON.stringify(v));
+  set active(bool) {
+    if (bool) {
+      document.body.classList.add('gallery-active');
+      return;
+    } 
+
+    if (!bool && document.body.classList.contains('gallery-active')) {
+      document.body.classList.remove('gallery-active');   
+    }
   }
 
   get gallery() {
@@ -23,6 +31,7 @@ class TheGallery extends HTMLElement {
 
   open(e) {
     this.buildGallery(e.detail.images);
+    this.active = true;
   }
 
   close() {
@@ -44,12 +53,15 @@ class TheGallery extends HTMLElement {
     }
     
     this.gallery.replaceChildren(DOM);
+
+    // FIX ME!!
+    this.images[0].classList.add("active");
   }
 
   listeners() {
     document.body.addEventListener("gallery:open", this.open.bind(this));
     document.body.addEventListener("gallery:close", this.close.bind(this));
-    // document.body.addEventListener("gallery:more", this.more.bind(this));
+    // document.body.addEventListener("gallery:aside", this.more.bind(this));
     // document.body.addEventListener("gallery:prev", this.prev.bind(this));
     // document.body.addEventListener("gallery:next", this.next.bind(this));
   }

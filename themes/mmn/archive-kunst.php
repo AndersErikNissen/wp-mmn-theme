@@ -88,21 +88,24 @@
 </section>
 
 <the-gallery>
-  <div class="gallery-header">
-    <gallery-item item-type="more">
-      Læs mere
-    </gallery-item>
-    <gallery-item item-type="close">
-      Luk
+  <div class="gallery-images"></div>
+  <div class="gallery-aside">
+    <gallery-item item-type="aside">
+      <?php 
+        get_template_part( 'template-parts/parts/icon', null, array( 'type' => 'left' ) ); 
+        get_template_part( 'template-parts/parts/icon', null, array( 'type' => 'right' ) ); 
+      ?>
     </gallery-item>
   </div>
-  <div class="gallery-images"></div>
   <div class="gallery-footer">
     <gallery-item item-type="prev">
-      Forige
+      <?php get_template_part( 'template-parts/parts/icon', null, array( 'type' => 'left' ) ); ?>
+    </gallery-item>
+    <gallery-item item-type="close">
+      <?php get_template_part( 'template-parts/parts/icon', null, array( 'type' => 'close' ) ); ?>
     </gallery-item>
     <gallery-item item-type="next">
-      Næste
+      <?php get_template_part( 'template-parts/parts/icon', null, array( 'type' => 'right' ) ); ?>
     </gallery-item>
   </div>
 </the-gallery>

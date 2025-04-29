@@ -3,3 +3,54 @@ gallery-item,
 gallery-btn {
   display: block;
 }
+
+body.gallery-active {
+  overflow-y: hidden;
+}
+
+.gallery-aside,
+.gallery-image-wrapper:not(.active),
+body:not(.gallery-active) the-gallery {
+  display: none;
+}
+
+the-gallery {
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-light);
+  display: flex;
+  flex-direction: column;
+}
+
+.gallery-images {
+  flex: 1 1 auto;
+}
+
+.gallery-footer {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  padding: 12px;
+}
+
+.gallery-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.gallery-image-wrapper img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
