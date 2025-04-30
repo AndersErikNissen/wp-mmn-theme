@@ -56,10 +56,6 @@
                   ),
                 );
 
-                if ( get_the_title() ) {
-                  $json["title"] = get_the_title();
-                }
-
                 if ( get_the_content() ) {
                   $json["content"] = get_the_content();
                 }
@@ -88,25 +84,34 @@
 </section>
 
 <the-gallery>
-  <div class="gallery-images"></div>
-  <div class="gallery-aside">
-    <gallery-item item-type="aside">
-      <?php 
-        get_template_part( 'template-parts/parts/icon', null, array( 'type' => 'left' ) ); 
-        get_template_part( 'template-parts/parts/icon', null, array( 'type' => 'right' ) ); 
-      ?>
-    </gallery-item>
+  <div class="gallery-main">
+    <div class="gallery-aside">
+      <div class="gallery-aside-content rte">
+        <!-- CONTENT GOES HERE... -->
+      </div>
+      <gallery-btn item-type="aside">
+        <div class="gallery-aside-left">
+          <?php get_template_part( 'template-parts/parts/icon', null, array( 'type' => 'left' ) ); ?>
+        </div>
+        <div class="gallery-aside-right">
+          <?php get_template_part( 'template-parts/parts/icon', null, array( 'type' => 'right' ) ); ?>
+        </div>
+      </gallery-btn>
+    </div>
+    <div class="gallery-images">
+      <!-- IMAGES GOES HERE... -->
+    </div>
   </div>
   <div class="gallery-footer">
-    <gallery-item item-type="prev">
+    <gallery-btn item-type="prev">
       <?php get_template_part( 'template-parts/parts/icon', null, array( 'type' => 'left' ) ); ?>
-    </gallery-item>
-    <gallery-item item-type="close">
+    </gallery-btn>
+    <gallery-btn item-type="close">
       <?php get_template_part( 'template-parts/parts/icon', null, array( 'type' => 'close' ) ); ?>
-    </gallery-item>
-    <gallery-item item-type="next">
+    </gallery-btn>
+    <gallery-btn item-type="next">
       <?php get_template_part( 'template-parts/parts/icon', null, array( 'type' => 'right' ) ); ?>
-    </gallery-item>
+    </gallery-btn>
   </div>
 </the-gallery>
 <?php

@@ -8,7 +8,6 @@ body.gallery-active {
   overflow-y: hidden;
 }
 
-.gallery-aside,
 .gallery-image-wrapper:not(.active),
 body:not(.gallery-active) the-gallery {
   display: none;
@@ -54,3 +53,22 @@ the-gallery {
   object-fit: contain;
 }
 
+the-gallery[single-image] gallery-btn[item-type="prev"],
+the-gallery[single-image] gallery-btn[item-type="next"] {
+  display: none;
+}
+
+.gallery-aside {
+  flex: 0 1 30%;
+}
+
+.gallery-main {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+the-gallery[aside="closed"] .gallery-aside-left,
+the-gallery:not([aside="closed"]) .gallery-aside-right,
+the-gallery[aside="open"] .gallery-aside-right {
+  display: none;
+}

@@ -5,42 +5,32 @@ class TheGallery extends HTMLElement {
     super();
   }
 
-  get active() {
-    // RENAME to toggleGallery..... get/set is not needed
-    return !!document.body.classList.contains('gallery-active');
-  }
+  activeImageIndex = 0;
+  images = [];
 
-  set active(bool) {
-    if (bool) {
-      document.body.classList.add('gallery-active');
-      return;
-    } 
-
-    if (!bool && document.body.classList.contains('gallery-active')) {
-      document.body.classList.remove('gallery-active');   
-    }
-  }
-
-  get gallery() {
-    return this._gallery;
-  }
-
-  set gallery(ele) {
-    this._gallery = this.querySelector(ele);
+  hasSingleImage() {
+    this.images.length === 1 ? this.setAttribute('single-image', '') : this.removeAttribute('single-image');
   }
 
   open(e) {
     this.buildGallery(e.detail.images);
-    this.active = true;
+    this.buildAsideContent(e.detail.content);
+    this.hasSingleImage();
+    this.changeImage(0);
+    document.body.classList.add('gallery-active');
   }
-
+  
   close() {
-    this.open = false;
+    this.images = [];
+    this.activeImageIndex = 0;
+
+    if (document.body.classList.contains('gallery-active')) {
+      document.body.classList.remove('gallery-active');   
+    }
   }
   
   buildGallery(images) {
     const DOM = new DocumentFragment();
-    this.images = [];
 
     for (const key in images) {
       let wrapper = document.createElement("div");
@@ -53,34 +43,75 @@ class TheGallery extends HTMLElement {
     }
     
     this.gallery.replaceChildren(DOM);
+  }
 
-    // FIX ME!!
-    this.images[0].classList.add("active");
+  changeImage(modifer) {
+    this.images[this.activeImageIndex].classList.remove('active');
+    this.activeImageIndex = this.activeImageIndex + modifer;
+    
+    if (this.activeImageIndex >= this.images.length) {
+      this.activeImageIndex = 0;
+    } else if (this.activeImageIndex < 0) {
+      this.activeImageIndex = this.images.length - 1;
+    };
+    
+    this.images[this.activeImageIndex].classList.add('active');
+  }
+
+  toggleAside() {
+    if (!this.hasAttribute('aside')) {
+      this.setAttribute('aside', 'open');  
+    } else {
+      this.setAttribute('aside', this.getAttribute('aside') === 'open' ? 'closed' : 'open');
+    }
+  }
+
+  buildAsideContent(content) {
+    this.asideContent.innerHTML = content;
   }
 
   listeners() {
     document.body.addEventListener("gallery:open", this.open.bind(this));
     document.body.addEventListener("gallery:close", this.close.bind(this));
-    // document.body.addEventListener("gallery:aside", this.more.bind(this));
-    // document.body.addEventListener("gallery:prev", this.prev.bind(this));
-    // document.body.addEventListener("gallery:next", this.next.bind(this));
+    document.body.addEventListener("gallery:aside", this.toggleAside.bind(this));
+    document.body.addEventListener("gallery:prev", () => this.changeImage(-1));
+    document.body.addEventListener("gallery:next", () => this.changeImage(1));
   }
 
   connectedCallback() {
-    this.gallery = '.gallery-images';
+    this.gallery = this.querySelector('.gallery-images');
+    this.asideContent = this.querySelector('.gallery-aside-content');
     this.listeners();
   }
 }
 customElements.define("the-gallery", TheGallery);
 
 
-class GalleryItem extends HTMLElement {
+class GalleryBtn extends HTMLElement {
   constructor() {
     super();
   }
 
   get type() {
-    return this.getAttribute('item-type') || 'open';
+    return this.getAttribute('item-type');
+  }
+
+  click() {
+    document.body.dispatchEvent(new CustomEvent(
+      "gallery:" + this.type 
+    ));
+  }
+
+  connectedCallback() {
+    this.addEventListener('click', this.click.bind(this));
+  }
+}
+customElements.define("gallery-btn", GalleryBtn);
+
+
+class GalleryItem extends HTMLElement {
+  constructor() {
+    super();
   }
 
   get detail() {
@@ -89,7 +120,7 @@ class GalleryItem extends HTMLElement {
 
   click() {
     document.body.dispatchEvent(new CustomEvent(
-      "gallery:" + this.type, {
+      "gallery:open", {
         detail: this.detail
       } 
     ));
