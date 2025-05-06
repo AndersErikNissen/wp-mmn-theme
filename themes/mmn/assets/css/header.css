@@ -36,8 +36,9 @@
 }
 
 .header-row .menu-item:hover a,
-.header-row .current_page_item {
+.header-row .current-menu-item {
   text-decoration: underline;
+  text-underline-offset: 0.3em
 }
 
 .js-mobile-menu-btn {

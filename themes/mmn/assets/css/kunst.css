@@ -1,3 +1,7 @@
+.kunst-item {
+  cursor: pointer;
+}
+
 @media (min-width: 980px) {
   .kunst-items .sxs {
     gap: 20px;

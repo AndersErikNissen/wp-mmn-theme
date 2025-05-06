@@ -23,6 +23,7 @@ class TheGallery extends HTMLElement {
   close() {
     this.images = [];
     this.activeImageIndex = 0;
+    this.resetAside();
 
     if (document.body.classList.contains('gallery-active')) {
       document.body.classList.remove('gallery-active');   
@@ -58,16 +59,21 @@ class TheGallery extends HTMLElement {
     this.images[this.activeImageIndex].classList.add('active');
   }
 
+  resetAside() {
+    this.classList.remove('closed-aside');
+    this.classList.remove('disabled-aside');
+  }
+
   toggleAside() {
-    if (!this.hasAttribute('aside')) {
-      this.setAttribute('aside', 'open');  
-    } else {
-      this.setAttribute('aside', this.getAttribute('aside') === 'open' ? 'closed' : 'open');
-    }
+    this.classList.toggle('closed-aside');
   }
 
   buildAsideContent(content) {
-    this.asideContent.innerHTML = content;
+    if (content) {
+      this.asideContent.innerHTML = content;
+    } else {
+      this.classList.add('disabled-aside');
+    };
   }
 
   listeners() {

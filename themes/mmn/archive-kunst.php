@@ -89,18 +89,16 @@
       <div class="gallery-aside-content rte">
         <!-- CONTENT GOES HERE... -->
       </div>
-      <gallery-btn item-type="aside">
-        <div class="gallery-aside-left">
-          <?php get_template_part( 'template-parts/parts/icon', null, array( 'type' => 'left' ) ); ?>
-        </div>
-        <div class="gallery-aside-right">
-          <?php get_template_part( 'template-parts/parts/icon', null, array( 'type' => 'right' ) ); ?>
-        </div>
+      <gallery-btn class="gallery-aside-btn-close" item-type="aside">
+        <?php get_template_part( 'template-parts/parts/icon', null, array( 'type' => 'left' ) ); ?>
       </gallery-btn>
     </div>
     <div class="gallery-images">
       <!-- IMAGES GOES HERE... -->
     </div>
+    <gallery-btn class="gallery-aside-btn-open" item-type="aside">
+      <?php get_template_part( 'template-parts/parts/icon', null, array( 'type' => 'right' ) ); ?>
+    </gallery-btn>
   </div>
   <div class="gallery-footer">
     <gallery-btn item-type="prev">

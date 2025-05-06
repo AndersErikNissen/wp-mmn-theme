@@ -4,16 +4,12 @@ gallery-btn {
   display: block;
 }
 
-body.gallery-active {
-  overflow-y: hidden;
-}
-
-.gallery-image-wrapper:not(.active),
-body:not(.gallery-active) the-gallery {
-  display: none;
+gallery-btn {
+  cursor: pointer;
 }
 
 the-gallery {
+  --gallery-main-spacing: 50px;
   z-index: 100;
   position: fixed;
   top: 0;
@@ -25,8 +21,58 @@ the-gallery {
   flex-direction: column;
 }
 
+body.gallery-active {
+  overflow-y: hidden;
+}
+
+.gallery-image-wrapper:not(.active),
+body:not(.gallery-active) the-gallery {
+  display: none;
+}
+
+.gallery-main {
+  padding: var(--gallery-main-spacing) var(--gallery-main-spacing) 0;
+  display: flex;
+  gap: 20px;
+  flex: 1 1 auto;
+}
+
 .gallery-images {
   flex: 1 1 auto;
+}
+
+.gallery-aside {
+  flex: 0 1 35%;
+  display: flex;
+  gap: 4px;
+}
+
+.gallery-aside-btn-close {
+  flex: 0 0 auto;
+  align-self: center;
+}
+
+.gallery-aside-btn-open {
+  display: none;
+  position: absolute;
+}
+
+@media (min-width: 980px) {
+  .gallery-aside-btn-open {
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+.closed-aside .gallery-aside-btn-open {
+  display: block;
+}
+
+.disabled-aside .gallery-aside,
+.disabled-aside .gallery-aside-btn-open,
+.closed-aside .gallery-aside {
+  display: none;
 }
 
 .gallery-footer {
@@ -35,7 +81,16 @@ the-gallery {
   justify-content: center;
   align-items: center;
   gap: 6px;
-  padding: 12px;
+  height: var(--gallery-main-spacing);
+}
+
+.gallery-footer gallery-btn {
+  flex: 0 1 auto;
+}
+
+.gallery-footer gallery-btn svg {
+  height: 100%;
+  width: auto;
 }
 
 .gallery-image-wrapper {
@@ -58,17 +113,36 @@ the-gallery[single-image] gallery-btn[item-type="next"] {
   display: none;
 }
 
-.gallery-aside {
-  flex: 0 1 30%;
-}
+@media (max-width: 979px) {
+  the-gallery {
+    --gallery-main-spacing: 20px;
+  }
 
-.gallery-main {
-  display: flex;
-  flex: 1 1 auto;
-}
+  .gallery-main {
+    position: relative;
+    flex-direction: column-reverse;
+  }
 
-the-gallery[aside="closed"] .gallery-aside-left,
-the-gallery:not([aside="closed"]) .gallery-aside-right,
-the-gallery[aside="open"] .gallery-aside-right {
-  display: none;
+  .gallery-aside {
+    flex-direction: column-reverse;
+  }
+
+  .gallery-aside {
+    flex: 0 1 auto;
+    padding-bottom: var(--gallery-main-spacing);
+  }
+
+  .gallery-aside-btn-close {
+    transform: rotate(-90deg);
+  }
+
+  .gallery-aside-btn-open {
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%) rotate(-90deg);
+  }
+
+  .gallery-footer {
+    height: 40px;
+  }
 }

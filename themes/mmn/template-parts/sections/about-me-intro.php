@@ -8,10 +8,13 @@
   <div class="site-width">
     <div class="sxs">
       <div class="about-me-intro-info-items sxs-item">
-        <div class="info-item">
-          <p class="h4">Alder</p>
-          <p class="info-item-content"><?php echo $age->y ?></p>
-        </div>
+
+        <?php if ( get_field( 'section_intro_about' ) ) : ?>
+          <div class="info-item">
+            <p class="h4">Personlig information</p>
+            <p class="info-item-content"><?php echo str_replace( '[age]', $age->y . ' år', get_field( 'section_intro_about' ) ) ?></p>
+          </div>
+        <?php endif; ?>
         
         <?php if ( get_field( 'section_intro_location' ) ) : ?>
           <div class="info-item">
