@@ -1,2 +1,8 @@
 /uploads
+/database
+/mu-plugins
+/fonts
+db.php
+debug.log
 .DS_Store
+

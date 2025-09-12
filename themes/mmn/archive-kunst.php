@@ -4,13 +4,14 @@
   $options = get_field( 'page_kunst', get_page_by_path( 'options' )->ID );
   $title = isset( $options['title'] ) ? $options['title'] : get_the_archive_title();
   $content = isset( $options['content'] ) ? $options['content'] : false;
+  $art = isset( $options['art'] ) ? $options['art'] : false;
 ?>
 
 <section class="kunst-intro section">
   <div class="site-width">
     <div class="sxs">
       <div class="sxs-item">
-        <h1 class="h1"><?php echo $title; ?></h1>
+        <h1 class="h1"><?= $title; ?></h1>
       </div>
     </div>
   </div>
@@ -22,7 +23,7 @@
       <div class="sxs">
         <div class="sxs-item">
           <div class="rte">
-            <?php echo $content; ?>
+            <?= $content; ?>
           </div>
         </div>
       </div>
@@ -34,50 +35,23 @@
   <div class="site-width">
     <div class="sxs">
       <?php
-        if ( have_posts() ) {
-          $i = 0; 
-          while ( have_posts() ) : 
+        if ( $art ) {
+
+          foreach ( $art as $post ) {
+            setup_postdata( $post );
+            get_template_part( 'template-parts/content/content-page-kunst' );
+          }
+
+        } elseif ( have_posts() ) {
+
+          while ( have_posts() ) {
             the_post(); 
-            if ( has_post_thumbnail( get_the_ID() ) ) : ?>
-              <gallery-item class="kunst-item sxs-item" id="kunst-id-<?php echo str_replace( ' ', '', get_the_title() ); ?>">
-              <?php
-                echo '<div class="ratio-container">';
-                echo wp_get_attachment_image( get_post_thumbnail_id(), 'large', false, array( 
-                    'sizes' => '(max-width: 979px) 100vw, (max-width: 1899px) 33vw, 633px' 
-                  ) ); 
-                echo '</div>';
-                
-                $json = array(
-                  "images" => array(
-                    "image_0" => array(
-                      "src" => wp_get_attachment_image_url( get_post_thumbnail_id(), 'large' ),
-                      "srcset" => wp_get_attachment_image_srcset( get_post_thumbnail_id(), 'large' ),
-                    ),
-                  ),
-                );
-
-                if ( get_the_content() ) {
-                  $json["content"] = get_the_content();
-                }
-
-                for ( $i = 1; $i < 7; $i++ ) {
-                  $image_id = get_field( 'image_' . $i );
-                  if ( $image_id ) {
-                    $json["images"]["image_" . $i] = array(
-                      "src" => wp_get_attachment_image_url( $image_id, 'large' ),
-                      "srcset" => wp_get_attachment_image_srcset( $image_id, 'large' ),
-                    );
-                  }
-                }
-
-                echo '<script type="application/json">';
-                echo json_encode( $json );
-                echo '</script>';
-              ?>
-              </gallery-item>
-            <?php endif; 
-          endwhile;
+            get_template_part( 'template-parts/content/content-page-kunst' );
+          }
+          
         }
+
+        wp_reset_postdata();
       ?>
     </div>
   </div>
@@ -88,29 +62,39 @@
     <div class="gallery-aside">
       <div class="gallery-aside-content rte">
         <!-- CONTENT GOES HERE... -->
+        <!-- CONTENT GOES HERE... -->
+        <!-- CONTENT GOES HERE... -->
       </div>
+
       <gallery-btn class="gallery-aside-btn-close" item-type="aside">
         <?php get_template_part( 'template-parts/parts/icon', null, array( 'type' => 'left' ) ); ?>
       </gallery-btn>
     </div>
+
     <div class="gallery-images">
       <!-- IMAGES GOES HERE... -->
+      <!-- IMAGES GOES HERE... -->
+      <!-- IMAGES GOES HERE... -->
     </div>
+
     <gallery-btn class="gallery-aside-btn-open" item-type="aside">
       <?php get_template_part( 'template-parts/parts/icon', null, array( 'type' => 'right' ) ); ?>
     </gallery-btn>
   </div>
+
   <div class="gallery-footer">
     <gallery-btn item-type="prev">
       <?php get_template_part( 'template-parts/parts/icon', null, array( 'type' => 'left' ) ); ?>
     </gallery-btn>
+
     <gallery-btn item-type="close">
       <?php get_template_part( 'template-parts/parts/icon', null, array( 'type' => 'close' ) ); ?>
     </gallery-btn>
+
     <gallery-btn item-type="next">
       <?php get_template_part( 'template-parts/parts/icon', null, array( 'type' => 'right' ) ); ?>
     </gallery-btn>
   </div>
 </the-gallery>
-<?php
-  get_footer();
+
+<?php get_footer();
