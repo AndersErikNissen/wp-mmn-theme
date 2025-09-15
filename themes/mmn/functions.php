@@ -92,6 +92,7 @@ add_action('wp_enqueue_scripts', 'header_styles');
 function footer_scripts() 
 {
   wp_enqueue_script( 'mobile-menu', get_theme_file_uri( 'assets/js/mobile-menu.js' ), array(), "1.0", TRUE );
+  wp_enqueue_script( 'scroll', get_theme_file_uri( 'assets/js/scroll.js' ), array(), "1.0", TRUE );
 
   if ( get_post() ) {
     if ( get_page_by_path( 'om-mig' ) && get_post()->ID === get_page_by_path( 'om-mig' )->ID ) {

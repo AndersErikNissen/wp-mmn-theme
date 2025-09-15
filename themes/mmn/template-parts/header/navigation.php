@@ -9,7 +9,9 @@
       'container'  => false
     ) ); ?>
 
-    <div class="js-mobile-menu-btn mobile:only"></div>
+    <div class="mobile-menu-btn-wrapper mobile:only">
+      <div class="js-mobile-menu-btn"></div>
+    </div>
   </nav>
 </header>
 

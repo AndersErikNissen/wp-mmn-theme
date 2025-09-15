@@ -1,20 +1,22 @@
 #Header {
-  padding: 14px 0;
   position: sticky;
   left: 0;
   top: 0;
   z-index: 10;
+  background-color: var(--color-light);
+  transition: transform 300ms linear;
+  border-bottom: 1px solid var(--color-light-grey);
 }
 
 #Header-content {
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 
 #Header-icon {
   display: inline-block;
-  width: 60px;
+  width: 52px;
+  padding: 12px 0;
 }
 
 #Header-icon svg {
@@ -26,19 +28,28 @@
 .header-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 60px;
+  gap: 32px;
+  margin: -1px 0;
 }
 
 .header-row .menu-item {
   flex-shrink: 0;
   font-weight: 300;
-  font-size: 5rem;
+  font-size: 4rem;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
 }
 
-.header-row .menu-item:hover a,
-.header-row .current-menu-item {
-  text-decoration: underline;
-  text-underline-offset: 0.3em
+.header-row .menu-item:hover,
+.header-row .menu-item.current-menu-item {
+  border-bottom: 1px solid var(--color-dark);
+}
+
+.mobile-menu-btn-wrapper {
+  display: flex;
+  align-items: center;
 }
 
 .js-mobile-menu-btn {
@@ -102,6 +113,10 @@ body:not(.mobile-menu-open) .js-mobile-menu {
   gap: 32px;
   font-size: 8rem;
   font-weight: 300;
+}
+
+.Header--hide {
+  transform: translateY(-101%);
 }
 
 @media (max-width: 979px) {
