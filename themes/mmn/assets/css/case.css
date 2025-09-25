@@ -7,6 +7,15 @@
   margin-top: 60px;
 }
 
+.case-hero-image .ratio-container {
+  overflow: hidden;
+}
+
+.case-hero-image img {
+  height: calc(100% + 32vh);
+  transform: translateY(calc(32vh * (var(--progress) / 100) * -1));
+}
+
 .case-info-items {
   display: flex;
   flex-direction: column;
@@ -22,9 +31,14 @@
   --ratio: 125%;
 }
 
-
 .case-info-item-flex {
   display: flex;
   flex-wrap: wrap;
   gap: 6px 12px;
+}
+
+@media (max-width: 979px) {
+  .case-hero-image {
+    --ratio: 125%;
+  }
 }

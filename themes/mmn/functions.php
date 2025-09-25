@@ -63,6 +63,7 @@ function header_styles()
     if ( is_front_page() ) {
       wp_enqueue_style( 'front-page', get_theme_file_uri( 'assets/css/front-page.css' ) );
       wp_enqueue_style( 'content-page-posts', get_theme_file_uri( 'assets/css/content-page-posts.css' ) );
+      wp_enqueue_style( 'gallery', get_theme_file_uri( 'assets/css/gallery.css' ) );
     }
   
     if ( is_front_page() || get_page_by_path( 'kontakt' ) && get_post()->ID === get_page_by_path( 'kontakt' )->ID ) {
@@ -100,7 +101,7 @@ function footer_scripts()
     }
   }
   
-  if ( is_post_type_archive( 'kunst' ) ) {
+  if ( is_front_page() || is_post_type_archive( 'kunst' ) ) {
     wp_enqueue_script( 'gallery', get_theme_file_uri( 'assets/js/gallery.js' ), array(), "1.0", TRUE );
   }
 }

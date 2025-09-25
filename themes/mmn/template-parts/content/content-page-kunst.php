@@ -26,7 +26,7 @@
   }
 ?>
 
-<gallery-item class="kunst-item sxs-item" id="kunst-id-<?php echo str_replace( ' ', '', get_the_title() ); ?>">
+<gallery-item class="kunst-item kunst-card sxs-item <?php if ( isset( $args['class'] ) ) $args['class']; ?>" id="kunst-id-<?php echo str_replace( ' ', '', get_the_title() ); ?>">
   <div class="ratio-container">
     <?= wp_get_attachment_image( get_post_thumbnail_id(), 'large', false, array( 
       'sizes' => '(max-width: 979px) 100vw, (max-width: 1899px) 33vw, 633px' 

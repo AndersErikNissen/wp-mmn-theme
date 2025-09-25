@@ -1,4 +1,4 @@
-<header id="Header">
+<header id="Header" class="<?php if( is_front_page() ) echo 'Header--hide'; ?>">
   <nav id="Header-content" class="site-width">
     <div id="Header-icon" class="pos:rel">
       <?php get_template_part( 'template-parts/parts/logo' ); ?>

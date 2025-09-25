@@ -26,6 +26,7 @@
   --site-margin: 40px;
 
   --color-dark: rgba(0, 0, 0, 1);
+  --color-dark-grey: rgb(55, 55, 55);
   --color-light-grey: rgb(246, 246, 246);
   --color-light: rgba(255, 255, 255, 1);
 }
@@ -38,6 +39,11 @@
 
 html {
   font-size: 4px;
+}
+
+html,
+a {
+  cursor: url("./assets/media/svg/cursor.svg") 5 5, auto;
 }
 
 body {
@@ -102,9 +108,60 @@ body {
 .link,
 .link-medium,
 .link-large {
+  display: inline-block;
   font-weight: 400;
-  text-decoration: underline;
-  text-underline-offset: 0.3em
+  cursor: url("./assets/media/svg/cursor-foelg-link.svg") 26 26, pointer;
+  position: relative;
+  padding: 0.25em 0;
+  margin: -0.25em 0;
+  overflow: hidden;
+}
+
+.link::before,
+.link-medium::before,
+.link-large::before {
+  content: "";
+  position: absolute;
+  height: 0.075em;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  background-color: currentColor;
+}
+
+.link:hover::before,
+.link-medium:hover::before,
+.link-large:hover::before {
+  animation: linkBefore 600ms ease-in-out;
+}
+
+@keyframes linkBefore {
+  50% {
+    transform: translateX(101%);
+    opacity: 1;
+  }
+  
+  51% {
+    opacity: 0;
+  }
+  
+  52% {
+    opacity: 0;
+  }
+  
+  53% {
+    opacity: 0;
+    transform: translateX(-101%);
+  }
+  
+  54% {
+    opacity: 1;
+    transform: translateX(-101%);
+  }
+  
+  100% {
+    transform: translateX(0);
+  }
 }
 
 .link {
@@ -123,6 +180,18 @@ body {
   display: flex;
   flex-direction: column;
   gap: 4px;
+}
+
+.btn {
+  display: inline-flex;
+  font-size: 3.5rem;
+  min-width: 16rem;
+  padding: 14px 32px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid currentColor;
+  text-transform: uppercase;
+  line-height: 1;
 }
 
 .info-item-content {
@@ -208,7 +277,44 @@ body {
   display: block;
 }
 
+.case-card,
+.case-card a {
+  cursor: url("./assets/media/svg/cursor-se-case.svg") 26 26, pointer;
+}
+
+.kunst-card {
+  cursor: url("./assets/media/svg/cursor-se-kunst.svg") 26 26, pointer;
+}
+
+.case-card .ratio-container,
+.kunst-card .ratio-container {
+  overflow: hidden;
+}
+
+.case-card img,
+.kunst-card img {
+  transition: transform 500ms ease-in-out;
+  transform-origin: center;
+}
+
+.case-card:hover img,
+.kunst-card:hover img {
+  transform: scale(1.025);
+}
+
+body:not(.home) #Content {
+  padding-top: 60px;
+}
+
+.cursor-email {
+  cursor: url("./assets/media/svg/cursor-email-mig.svg") 26 26, pointer;
+}
+
 @media (min-width: 980px) {
+  body:not(.home) #Content {
+    padding-top: 52px;
+  }
+
   .mobile\:only {
     display: none;
   }

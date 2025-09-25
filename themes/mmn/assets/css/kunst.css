@@ -1,13 +1,5 @@
-.kunst-item {
-  cursor: pointer;
-}
-
 @media (min-width: 980px) {
-  .kunst-items .sxs {
-    gap: 20px;
-  }
-
   .kunst-items .sxs-item {
-    flex: 0 0 calc((100% - 40px) / 3);
+    flex: 0 0 calc((100% - 120px) / 3);
   }
 }

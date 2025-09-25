@@ -8,8 +8,12 @@
   </head>
   <body <?php body_class(); ?>>
     <?php wp_body_open(); ?>
+
     <div id="Page">
-      <?php get_template_part( 'template-parts/header/navigation' ); ?>
+      <?php if ( !is_front_page() ) {
+        get_template_part( 'template-parts/header/navigation' );
+      }; ?>
+      
       <main id="Content">
 
 

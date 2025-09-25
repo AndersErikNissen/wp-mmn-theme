@@ -37,26 +37,31 @@
                   $sizes = $args['sizes'];
                 }
               }
+
+              if ( get_post_type() === 'kunst' ) :
+                get_template_part( 
+                  'template-parts/content/content-page-kunst', 
+                  null, 
+                  array( 'class' => 'content-page-posts-post content-page-posts-post-count-' . $count ),
+                );
+              else :
             ?>
-              <div class="content-page-posts-post sxs-item <?php echo 'content-page-posts-post-count-' . $count; ?>">
+              <div class="content-page-posts-post sxs-item <?= 'content-page-posts-post-count-' . $count; ?> <?= get_post_type() . '-card' ?>">
                 <div class="ratio-container">
                   <?php if ( has_post_thumbnail( get_the_ID() ) ) : 
                     echo wp_get_attachment_image( get_post_thumbnail_id(), 'large', false, array( 'sizes' => $sizes ) ); 
                   endif; ?>
-                  <?php if ( get_post_type() !== 'kunst' ) : ?>
-                    <a class="pos:abs-cover" href="<?php echo get_permalink(); ?>"></a>
-                  <?php endif; ?>
+
+                  <a class="pos:abs-cover" href="<?= get_permalink(); ?>"></a>
                 </div>
 
-                <?php if ( get_post_type() !== 'kunst' ) : ?>
-                  <p class="content-page-posts-post-title h3">
-                    <a href="<?php echo get_permalink(); ?>">
-                      <?php echo get_field('section_info_client') ?: get_the_title(); ?>
-                    </a>
-                  </p>
-                <?php endif; ?>
+                <p class="content-page-posts-post-title h3">
+                  <a href="<?php echo get_permalink(); ?>">
+                    <?php echo get_field('section_info_client') ?: get_the_title(); ?>
+                  </a>
+                </p>
               </div>
-            <?php 
+              <?php endif;
               $count++;
               endforeach; 
             ?>

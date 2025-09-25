@@ -1,35 +1,44 @@
+"use strict";
+
+const lerp = (from, to, ease) => from * (1 - ease) + to * ease;
+const clamp = (v, min = 0, max = 100) => Math.min(Math.max(min, v), max);
+
+const isFrontPage = document.body.classList.contains("home");
+
 const watchScrollSections = () => {
   let elements = Array.from(document.querySelectorAll(".js-scroll-section"));
 
   if (elements.length === 0) return;
 
-  const defaultProgressFrom =  window.innerHeight * 1.0; // Calculates the progress from this point on screen (E.g. 1.0 = top of window, 0.0 = bottom of window, 0.5 = the middle of window)
+  const defaultProgressFrom = 1.0; // Calculates the progress from this point on screen (E.g. 1.0 = top of window, 0.0 = bottom of window, 0.5 = the middle of window)
   const ease = 0.1;
 
   let ticking = false;
   let progressing = false;
 
-  const lerp = (from, to) => from * (1 - ease) + to * ease;
-  const clamp = (v, min = 0, max = 100) => Math.min(max, Math.max(min, v));
+  elements = elements.map((element) => {
+    let progressFrom = defaultProgressFrom;
 
-  elements.map((element) => {  
+    if (element.dataset.progressFrom) {
+      progressFrom = parseFloat(element.dataset.progressFrom);
+    }
+
     return {
       element: element,
       progress: 0,
-      progressFrom: target.dataset.progressFrom ?? defaultProgressFrom,
+      progressFrom: window.innerHeight * progressFrom,
     };
   });
-
   
-  const progressElement = (element) => {
-    const rect = element.getBoundingClientRect();
-    const progressGoal = 100 - ((rect.bottom - element.progressFrom) / rect.height * 100);
-    const currentProgress = clamp(lerp(element.progress, progressGoal));
+  const progressElement = (elementObject) => {
+    const rect = elementObject.element.getBoundingClientRect();
+    const progressGoal = 100 - ((rect.bottom - elementObject.progressFrom) / rect.height * 100);
+    const currentProgress = clamp(lerp(elementObject.progress, progressGoal, ease));
 
-    if (currentProgress === element.progress) return false;
+    if (currentProgress === elementObject.progress) return false;
 
-    element.progress = currentProgress;
-    element.element.style.setProperty('--progress', currentProgress);
+    elementObject.progress = currentProgress;
+    elementObject.element.style.setProperty('--progress', currentProgress);
     
     return true;
   };
@@ -62,10 +71,10 @@ const watchScrollSections = () => {
 };
 
 watchScrollSections();
-  
 
 const watchScrollDirection = () => {
   const header = document.querySelector("#Header");
+  const frontPageScroller = document.querySelector(".js-front-page-scroller");
   
   if (!header) return;
   
@@ -85,8 +94,20 @@ const watchScrollDirection = () => {
       header.classList.remove(hideClass);
     }
 
+    const frontPageScrollerRect = frontPageScroller.getBoundingClientRect();
+    
     if (!isHidden && !isScrollingUp) {
-      header.classList.add(hideClass);
+      let hide = true;
+      
+      if (isFrontPage) {
+        if (frontPageScrollerRect.bottom >= window.scrollY - window.innerHeight / 4) {
+          hide = false;
+        }
+      }
+
+      if (hide) {
+        header.classList.add(hideClass);
+      }
     };
 
     previousScrollPosition = scrollPosition;
@@ -107,59 +128,99 @@ const watchScrollDirection = () => {
 
 watchScrollDirection();
 
+const watchFrontPageScroller = () => {
+  if (!isFrontPage) return;
 
-
-function swipeGalleryOnScroll() {
-  // Only run if a gallery section is rendered
-  const gallery = document.body.querySelector('.section-gallery') || false;
+  const SCROLLER_SECTION = document.querySelector(".js-front-page-scroller");
+  const MAIN_CONTENT = document.querySelector(".js-front-page-main-wrapper");
+  const TITLE_WRAPPER = SCROLLER_SECTION.querySelector(".js-front-page-scroller-title-wrapper");
   
-  if (!gallery) return;
+  if (!MAIN_CONTENT || !TITLE_WRAPPER) return;
 
-  const imageContainers = gallery.querySelectorAll(".section-gallery__image-container");
-  const galleryWidth = gallery.getBoundingClientRect().width;
-  const imagesWidth = imageContainers[0].getBoundingClientRect().left + imageContainers[imageContainers.length - 1].getBoundingClientRect().right;
-  
-  if (galleryWidth >= imagesWidth) return;
-  
-  // Animation loop
-  const images = gallery.querySelector(".section-gallery__images");
-  const heightDivider = 2; // If 2, the swiping starts when the top is at the middle of the viewport
+  const VIEWPORT_HEIGHT = window.innerHeight;
+  const SCROLLER_SECTION_RECT = SCROLLER_SECTION.getBoundingClientRect();
+  const TOTAL_TRANSFORM_AMOUNT = TITLE_WRAPPER.getBoundingClientRect().width - SCROLLER_SECTION_RECT.width;
+  const DISTANCE = SCROLLER_SECTION_RECT.height - VIEWPORT_HEIGHT
 
+  /**
+   * "BUG": Not quite sure why, but instead of going below 0, it would start using floating point numbers, and never go below 0. 
+   * The IF-statements below prevents that, using this clampMin.
+  */
+  const clampMin = 0.000005;
+  
   let ticking = false;
-  let looping = false;
-  let cache = 0;
-  
-  // Reference: https://www.trysmudford.com/blog/linear-interpolation-functions/
-  const clamp = (v, min = 0, max = 100) => Math.min(max, Math.max(min, v));
-  const lerp = (from, to, ease) => from * (1 - ease) + to * ease;
-  
-  const maxTransform = imagesWidth - galleryWidth;
+  let progressing = false;
+  let progresses = {
+    transform: 0,
+    fade: 0,
+  };
 
-  function loop() {
-    const rect = gallery.getBoundingClientRect();
-    const current = 100 - ((rect.bottom - (window.innerHeight / heightDivider)) / rect.height * 100);
-    const progress = clamp(lerp(cache, current, 0.1));
+  const progressTransform = (rect) => {
+    let goal = 100 - ((rect.top - VIEWPORT_HEIGHT) / DISTANCE * 100);
+    let updatedProgress = clamp(lerp(progresses.transform, goal, 0.2), clampMin);
     
-    if (cache !== progress) {
-      const transformString = "translateX(-" + (maxTransform / 100 * progress) + "px)";
+    if (updatedProgress === clampMin) {
+      updatedProgress = 0;
+    }
+    
+    if (updatedProgress !== progresses.transform) {
+      let transformString = "translateX(" + (TOTAL_TRANSFORM_AMOUNT / 100 * updatedProgress * -1) + "px)";
       
-      images.style.mozTransform = transformString;
-      images.style.webkitTransform = transformString;
-      images.style.transform = transformString;
-      
-      cache = progress;
-      window.requestAnimationFrame(loop);
+      TITLE_WRAPPER.style.mozTransform = transformString;
+      TITLE_WRAPPER.style.webkitTransform = transformString;
+      TITLE_WRAPPER.style.transform = transformString;
+
+      SCROLLER_SECTION.style.setProperty("--transform-progress", updatedProgress);
+  
+      progresses.transform = updatedProgress;
+      return true;
+    } 
+
+    return false;
+  }
+
+  const progressFade = (rect) => {
+    if (rect.top > VIEWPORT_HEIGHT && progresses.fade === 0) {
+      return false;
+    };
+
+    
+    let goal = 100 - (rect.top / VIEWPORT_HEIGHT * 100);
+    let updatedProgress = clamp(lerp(progresses.fade, goal, 0.2), clampMin);
+    
+    if (updatedProgress === clampMin) {
+      updatedProgress = 0;
+    }
+    
+    if (updatedProgress !== progresses.fade) {
+      SCROLLER_SECTION.style.setProperty("--fade-progress", updatedProgress);
+
+      progresses.fade = updatedProgress;
+      return true;
+    } 
+
+    return false;
+  }
+  
+  const progressSection = () => {
+    let rect = MAIN_CONTENT.getBoundingClientRect();
+
+    const TRANSFORMED = progressTransform(rect);
+    const FADED = progressFade(rect);
+
+    if (!TRANSFORMED && !FADED) {
+      progressing = false;
     } else {
-      looping = false;
+      window.requestAnimationFrame(progressSection);
     }
   }
 
-  window.addEventListener("scroll", () => {
+  const startLoop = () => {
     if (!ticking) {
       window.requestAnimationFrame(() => {
-        if (!looping) {
-          looping = true;
-          loop();
+        if (!progressing) {
+          progressing = true;
+          progressSection();
         }
 
         ticking = false;
@@ -167,50 +228,19 @@ function swipeGalleryOnScroll() {
 
       ticking = true;
     }
+  }
+
+  startLoop();
+
+  window.addEventListener("scroll", () => {
+    startLoop();
   });
-}
-swipeGalleryOnScroll();
+};
 
-function handleHeaderVisibility() {
-  const header = document.querySelector("#Header");
-  const headerHeight = header.getBoundingClientRect().height;
-
-  let isShowing = true;
-  let lastScrollY = 0;
-
-  function toggleVisibility(scrollY) {
-    const isScrollingDown = scrollY > lastScrollY;
-    let hide = isScrollingDown;
-    
-    if (hide && headerHeight + /* some buffer -> */ 200 > scrollY) hide = false;
-
-    if (hide === isShowing) {
-      isShowing = !isShowing;
-      header.classList.toggle('header-hidden');
-    }
-
-    lastScrollY = scrollY;
-  }
-
-  let ticking = false;
-
-  function debounce() {
-    if (!ticking) {
-      window.requestAnimationFrame(() => {
-        toggleVisibility(window.scrollY);
-        ticking = false;
-      });
-
-      ticking = true;
-    }
-  }
-
-  window.addEventListener("scroll", debounce);
-}
-
-handleHeaderVisibility();
+watchFrontPageScroller();
 
 window.addEventListener("resize", () => {
-  swipeGalleryOnScroll();
-  handleHeaderVisibility();
+  watchScrollDirection();
+  watchScrollSections();
+  watchFrontPageScroller();
 });

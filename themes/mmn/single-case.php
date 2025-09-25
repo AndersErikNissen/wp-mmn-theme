@@ -12,12 +12,12 @@
   </div>
 </section>
 
-<section class="case-hero-image section">
+<section class="case-hero-image section js-scroll-section" data-progress-from="0.25">
   <div class="site-width">
     <?php if ( has_post_thumbnail( get_the_ID() ) ) : ?>
       <div class="ratio-container">
         <?php echo wp_get_attachment_image( get_post_thumbnail_id(), 'large', false, array(
-          'sizes' => '(max-width: 1899px) 100vw, 1900px'
+          'sizes' => '(max-width: 1899px) 100vw, 2100px'
         ) ); ?>
       </div>
     <?php endif; ?>

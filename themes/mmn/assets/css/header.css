@@ -1,11 +1,16 @@
 #Header {
-  position: sticky;
+  position: fixed;
   left: 0;
   top: 0;
+  right: 0;
   z-index: 10;
   background-color: var(--color-light);
   transition: transform 300ms linear;
   border-bottom: 1px solid var(--color-light-grey);
+}
+
+.front-page-main-wrapper #Header {
+  position: sticky;
 }
 
 #Header-content {
@@ -36,15 +41,25 @@
   flex-shrink: 0;
   font-weight: 300;
   font-size: 4rem;
-  display: flex;
-  align-items: center;
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
+  display: flex;
+  transition: border 300ms linear, color 300ms linear;
 }
 
-.header-row .menu-item:hover,
-.header-row .menu-item.current-menu-item {
+.header-row .menu-item a {
+  display: flex;
+  align-items: center;
+}
+
+.header-row .menu-item.current-menu-item,
+.single-case .menu-item-object-case /* When on a single case, mark Cases */ {
   border-bottom: 1px solid var(--color-dark);
+}
+
+.header-row .menu-item:hover {
+  color: var(--color-dark-grey);
+  border-bottom: 1px solid var(--color-dark-grey);
 }
 
 .mobile-menu-btn-wrapper {
@@ -117,6 +132,7 @@ body:not(.mobile-menu-open) .js-mobile-menu {
 
 .Header--hide {
   transform: translateY(-101%);
+  pointer-events: none;
 }
 
 @media (max-width: 979px) {

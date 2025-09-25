@@ -57,6 +57,12 @@ class TheGallery extends HTMLElement {
     };
     
     this.images[this.activeImageIndex].classList.add('active');
+
+    if (this.images.length > 1) {
+      this.counter.textContent = (this.activeImageIndex + 1) + " / " + this.images.length;
+    } else {
+      this.counter.textContent = "";
+    }
   }
 
   resetAside() {
@@ -82,11 +88,25 @@ class TheGallery extends HTMLElement {
     document.body.addEventListener("gallery:aside", this.toggleAside.bind(this));
     document.body.addEventListener("gallery:prev", () => this.changeImage(-1));
     document.body.addEventListener("gallery:next", () => this.changeImage(1));
+    document.body.addEventListener("keyup", (e) => {
+      if (e.key === "Escape") {
+        this.close();
+      }
+
+      if (e.key === "ArrowLeft") {
+        this.changeImage(-1);
+      }
+
+      if (e.key === "ArrowRight") {
+        this.changeImage(1);
+      }
+    });
   }
 
   connectedCallback() {
     this.gallery = this.querySelector('.gallery-images');
     this.asideContent = this.querySelector('.gallery-aside-content');
+    this.counter = this.querySelector('.gallery-counter');
     this.listeners();
   }
 }

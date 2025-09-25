@@ -9,5 +9,5 @@
   $class = isset( $args['class'] ) ? $args['class'] : 'link-large';
 
   if ( $email ) : ?>
-    <a class="<?php echo $class; ?>" href="<?php echo esc_url( 'mailto:' . antispambot( $email ) ); ?>"><?php echo esc_html( antispambot( $email ) ); ?></a>
+    <a class="<?php echo $class; ?> cursor-email" href="<?php echo esc_url( 'mailto:' . antispambot( $email ) ); ?>"><?php echo esc_html( antispambot( $email ) ); ?></a>
 <?php endif;

@@ -21,7 +21,7 @@
       <?php
         if ( have_posts() ) {
           while ( have_posts() ) : the_post(); ?>
-            <div class="cases-case sxs-item">
+            <div class="cases-case sxs-item case-card">
               <div class="ratio-container">
                 <?php if ( has_post_thumbnail( get_the_ID() ) ) : 
                   echo wp_get_attachment_image( get_post_thumbnail_id(), 'large', false, array( 
