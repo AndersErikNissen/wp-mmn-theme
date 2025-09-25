@@ -194,6 +194,10 @@ body {
   line-height: 1;
 }
 
+.btn:active {
+  transform: scale(0.99);
+}
+
 .info-item-content {
   line-height: 1.35;
   font-size: 4rem;
@@ -309,6 +313,47 @@ body:not(.home) #Content {
 .cursor-email {
   cursor: url("./assets/media/svg/cursor-email-mig.svg") 26 26, pointer;
 }
+
+.content-404 .btn {
+  margin-top: 6rem;
+}
+
+/* START - ANIMATE-STRING */
+
+.animate-string {
+  display: inline-flex;
+  align-items: center;
+}
+
+.animate-string-letter,
+.animate-string-letter-wrapper,
+.animate-string-letter-inview,
+.animate-string-letter-outside {
+  display: inline-block;
+}
+
+.animate-string-letter {
+  overflow: hidden;
+}
+
+.animate-string-letter-wrapper {
+  position: relative;
+  transition: transform 300ms ease-out var(--delay);
+}
+
+*:hover > .animate-string .animate-string-letter-wrapper {
+  transform: translateY(100%);
+}
+
+.animate-string-letter-outside {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(-100%);
+}
+
+
+/* END - ANIMATE-STRING */
 
 @media (min-width: 980px) {
   body:not(.home) #Content {

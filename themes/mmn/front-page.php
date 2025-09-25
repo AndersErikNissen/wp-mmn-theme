@@ -41,7 +41,7 @@
             if( $link ) : ?>
               <div class="front-page-intro-link">
                 <a class="btn" href="<?= esc_url( $link['url'] ); ?>">
-                  <?= esc_html( $link['title'] ); ?>
+                  <?php get_template_part( 'template-parts/parts/animate-string', null, array( 'string' => $link['title'] ) ); ?>
                 </a>
               </div>
             <?php endif; ?>

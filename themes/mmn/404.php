@@ -19,7 +19,9 @@
           <h1 class="h1"><?php echo $title; ?></h1>
         <?php endif; ?>
 
-        <a class="link-large front-page-link" href="<?php echo home_url(); ?>">Til forsiden</a>
+        <a class="btn" href="<?php echo home_url(); ?>">
+          <?php get_template_part( 'template-parts/parts/animate-string', null, array( 'string' => 'Til forsiden' ) ); ?>
+        </a>
       </div>
       
       <?php if ( $image ) : ?>
