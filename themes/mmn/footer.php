@@ -40,8 +40,6 @@
     </div>
 
     <div class="mobile-menu js-mobile-menu mobile:only">
-      <div class="mobile-menu-background"></div>
-
       <div class="mobile-menu-content">
         <?php wp_nav_menu( array( 
           'container'  => false,
