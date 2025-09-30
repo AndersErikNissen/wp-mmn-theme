@@ -21,7 +21,8 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  cursor: url("../media/svg/cursor-se-mere.svg") 26 26, pointer;
+  cursor: url("../media/svg/cursor.svg") 5 5, pointer;
+  text-transform: uppercase;
 }
 
 @media (max-width: 979px) {

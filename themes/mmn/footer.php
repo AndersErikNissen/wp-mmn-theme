@@ -36,9 +36,26 @@
             </p>
           </div>
         </div>
-        
       </footer>
     </div>
+
+    <div class="mobile-menu js-mobile-menu mobile:only">
+      <div class="mobile-menu-background"></div>
+
+      <div class="mobile-menu-content">
+        <?php wp_nav_menu( array( 
+          'container'  => false,
+          'menu_class' => 'mobile-menu-menu',
+        ) ); ?>
+
+        <div class="mobile-menu-btn-wrapper">
+          <div class="js-mobile-menu-btn mobile-menu-btn">
+            <?php get_template_part( 'template-parts/parts/icon', null, array( 'type' => 'close' ) ); ?>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <?php wp_footer(); ?>
   </body>
 <html>

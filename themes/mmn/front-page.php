@@ -7,9 +7,13 @@
     <p class="front-page-scroller-title">
       <span class="front-page-scroller-title-wrapper js-front-page-scroller-title-wrapper">
         <span class="front-page-scroller-title-name">METTE-MARIE NISSEN</span>
-        <span class="front-page-scroller-title-portfolio">PORTFOLIO</span>
+        <span class="front-page-scroller-title-portfolio js-front-page-scroller-title-portfolio">PORTFOLIO</span>
       </span>
     </p>
+
+    <div class="front-page-scroller-notification">
+      <span class="js-front-page-scroller-notification-text">SCROLL</span>
+    </div>
 
     <div class="front-page-scroller-links">
       <?php 
@@ -18,8 +22,6 @@
       ?>
     </div>
   </div>
-  
-  <div class="front-page-scroller-cover"></div>
 </section>
 
 <div class="front-page-main-wrapper js-front-page-main-wrapper">

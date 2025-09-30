@@ -318,6 +318,74 @@ body:not(.home) #Content {
   margin-top: 6rem;
 }
 
+/* START - MOBILE-MENU */
+
+.mobile-menu:not(.mobile-menu-open) {
+  display: none;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+}
+
+.mobile-menu-content {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  gap: 2rem;
+  padding: var(--site-margin);
+  background-color: transparent;
+}
+
+.mobile-menu-animate .mobile-menu-content {
+  background-color: var(--color-light);
+  transition: background-color 400ms ease-in;
+}
+
+.mobile-menu-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6rem;
+  font-size: 10rem;
+  font-weight: 300;
+  flex: 1 1 auto;
+  opacity: 0;
+  transform: translateY(5%);
+}
+
+.mobile-menu-animate .mobile-menu-menu {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms ease-in 350ms, transform 300ms ease-in 350ms;
+}
+
+.mobile-menu-btn-wrapper {
+  display: flex;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.mobile-menu-btn {
+  display: block;
+  padding: 5px;
+  transition: background-color 300ms linear;
+}
+
+.mobile-menu-btn:hover {
+  background-color: var(--color-light-grey);
+}
+
+/* END - MOBILE-MENU */
+
 /* START - ANIMATE-STRING */
 
 .animate-string {

@@ -2,8 +2,10 @@
 
 const lerp = (from, to, ease) => from * (1 - ease) + to * ease;
 const clamp = (v, min = 0, max = 100) => Math.min(Math.max(min, v), max);
+const screenWidth = () => window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 
 const isFrontPage = document.body.classList.contains("home");
+let lastScreenWidth = screenWidth();
 
 const watchScrollSections = () => {
   let elements = Array.from(document.querySelectorAll(".js-scroll-section"));
@@ -59,12 +61,12 @@ const watchScrollSections = () => {
       window.requestAnimationFrame(() => {
         if (!progressing) {
           progressing = true;
-          progressElements();
+          progressElements(new Date());
         }
-
+        
         ticking = false;
       });
-
+      
       ticking = true;
     }
   });
@@ -94,13 +96,11 @@ const watchScrollDirection = () => {
       header.classList.remove(hideClass);
     }
 
-    const frontPageScrollerRect = frontPageScroller.getBoundingClientRect();
-    
     if (!isHidden && !isScrollingUp) {
       let hide = true;
       
-      if (isFrontPage) {
-        if (frontPageScrollerRect.bottom >= window.scrollY - window.innerHeight / 4) {
+      if (isFrontPage && frontPageScroller) {
+        if (frontPageScroller.getBoundingClientRect().bottom >= window.scrollY - window.innerHeight / 4) {
           hide = false;
         }
       }
@@ -134,13 +134,27 @@ const watchFrontPageScroller = () => {
   const SCROLLER_SECTION = document.querySelector(".js-front-page-scroller");
   const MAIN_CONTENT = document.querySelector(".js-front-page-main-wrapper");
   const TITLE_WRAPPER = SCROLLER_SECTION.querySelector(".js-front-page-scroller-title-wrapper");
+  const TITLE_PORTFOLIO = SCROLLER_SECTION.querySelector(".js-front-page-scroller-title-portfolio");
+  const SCROLL_NOTIFICATION = SCROLLER_SECTION.querySelector(".js-front-page-scroller-notification-text");
   
   if (!MAIN_CONTENT || !TITLE_WRAPPER) return;
 
-  const VIEWPORT_HEIGHT = window.innerHeight;
-  const SCROLLER_SECTION_RECT = SCROLLER_SECTION.getBoundingClientRect();
-  const TOTAL_TRANSFORM_AMOUNT = TITLE_WRAPPER.getBoundingClientRect().width - SCROLLER_SECTION_RECT.width;
-  const DISTANCE = SCROLLER_SECTION_RECT.height - VIEWPORT_HEIGHT
+  
+  let scrollerSectionRect, totalTransformAmount, distance;
+
+  const setBoundryValues = () => {
+    scrollerSectionRect = SCROLLER_SECTION.getBoundingClientRect();
+    totalTransformAmount = TITLE_WRAPPER.getBoundingClientRect().width - scrollerSectionRect.width;
+    distance = scrollerSectionRect.height - window.innerHeight;
+  };
+
+  setBoundryValues();
+
+  window.addEventListener("resize", () => {
+    if (screenWidth() === lastScreenWidth) return;
+
+    setBoundryValues();
+  });
 
   /**
    * "BUG": Not quite sure why, but instead of going below 0, it would start using floating point numbers, and never go below 0. 
@@ -156,7 +170,7 @@ const watchFrontPageScroller = () => {
   };
 
   const progressTransform = (rect) => {
-    let goal = 100 - ((rect.top - VIEWPORT_HEIGHT) / DISTANCE * 100);
+    let goal = 100 - ((rect.top - window.innerHeight) / distance * 100);
     let updatedProgress = clamp(lerp(progresses.transform, goal, 0.2), clampMin);
     
     if (updatedProgress === clampMin) {
@@ -164,13 +178,20 @@ const watchFrontPageScroller = () => {
     }
     
     if (updatedProgress !== progresses.transform) {
-      let transformString = "translateX(" + (TOTAL_TRANSFORM_AMOUNT / 100 * updatedProgress * -1) + "px)";
+      let transformStringWrapper = "translateX(" + (totalTransformAmount / 100 * updatedProgress * -1) + "px)";
+      let transformStringPortfolio = "translateX(" + (totalTransformAmount / 12 / 100 * updatedProgress * -1) + "px)";
       
-      TITLE_WRAPPER.style.mozTransform = transformString;
-      TITLE_WRAPPER.style.webkitTransform = transformString;
-      TITLE_WRAPPER.style.transform = transformString;
+      TITLE_WRAPPER.style.mozTransform = transformStringWrapper;
+      TITLE_WRAPPER.style.webkitTransform = transformStringWrapper;
+      TITLE_WRAPPER.style.transform = transformStringWrapper;
 
-      SCROLLER_SECTION.style.setProperty("--transform-progress", updatedProgress);
+      TITLE_PORTFOLIO.style.mozTransform = transformStringPortfolio;
+      TITLE_PORTFOLIO.style.webkitTransform = transformStringPortfolio;
+      TITLE_PORTFOLIO.style.transform = transformStringPortfolio;
+
+      SCROLL_NOTIFICATION.style.mozTransform = transformStringWrapper;
+      SCROLL_NOTIFICATION.style.webkitTransform = transformStringWrapper;
+      SCROLL_NOTIFICATION.style.transform = transformStringWrapper;
   
       progresses.transform = updatedProgress;
       return true;
@@ -180,12 +201,12 @@ const watchFrontPageScroller = () => {
   }
 
   const progressFade = (rect) => {
-    if (rect.top > VIEWPORT_HEIGHT && progresses.fade === 0) {
+    if (rect.top > window.innerHeight && progresses.fade === 0) {
       return false;
     };
 
     
-    let goal = 100 - (rect.top / VIEWPORT_HEIGHT * 100);
+    let goal = 100 - (rect.top / window.innerHeight * 100);
     let updatedProgress = clamp(lerp(progresses.fade, goal, 0.2), clampMin);
     
     if (updatedProgress === clampMin) {
@@ -230,17 +251,9 @@ const watchFrontPageScroller = () => {
     }
   }
 
-  startLoop();
-
   window.addEventListener("scroll", () => {
     startLoop();
   });
 };
 
 watchFrontPageScroller();
-
-window.addEventListener("resize", () => {
-  watchScrollDirection();
-  watchScrollSections();
-  watchFrontPageScroller();
-});

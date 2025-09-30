@@ -1,4 +1,4 @@
-<header id="Header" class="<?php if( is_front_page() ) echo 'Header--hide'; ?>">
+<header id="Header">
   <nav id="Header-content" class="site-width">
     <div id="Header-icon" class="pos:rel">
       <?php get_template_part( 'template-parts/parts/logo' ); ?>
@@ -10,13 +10,7 @@
     ) ); ?>
 
     <div class="mobile-menu-btn-wrapper mobile:only">
-      <div class="js-mobile-menu-btn"></div>
+      <div class="header-mobile-menu-btn js-mobile-menu-btn"></div>
     </div>
   </nav>
 </header>
-
-<div class="js-mobile-menu mobile:only">
-  <?php wp_nav_menu( array( 
-    'container'  => false
-  ) ); ?>
-</div>
