@@ -50,6 +50,7 @@ body {
   font-family: "Inter", Arial, Helvetica, sans-serif;
   font-weight: 400;
   min-height: 100vh;
+  background-color: #FFFFFF;
 }
 
 .site-width {
