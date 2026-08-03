@@ -1,12 +1,15 @@
 <?php
-  get_header();
+get_header();
 
-  if ( get_post()->ID === get_page_by_path( 'kontakt' )->ID ) {
+$post_id = get_post()->ID;
+$contact_id = get_page_by_path( 'kontakt' )->ID ?? null;
+$about_me_id = get_page_by_path( 'om-mig' )->ID ?? null;
+
+if ( $contact_id || $about_me_id ) {
+  if ( $post_id === $contact_id ) {
     get_template_part( 'template-parts/content/content-page-hero-contact' );
-  }
-
-  if ( get_post()->ID === get_page_by_path( 'om-mig' )->ID ) {
+  } elseif ( $post_id === $about_me_id ) {
     get_template_part( 'template-parts/content/content-page-about-me' );
   }
-
-  get_footer();
+}
+get_footer();
