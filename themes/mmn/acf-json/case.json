@@ -3,6 +3,32 @@
     "title": "Case",
     "fields": [
         {
+            "key": "field_6a9b1bbffb622",
+            "label": "Billede til kort",
+            "name": "case_card_img",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Bruges som billede på de \"kort\", som ses på Cases siden.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "allow_in_bindings": 0,
+            "preview_size": "medium"
+        },
+        {
             "key": "field_6807ef24743fb",
             "label": "Section Info",
             "name": "section_info",
@@ -334,12 +360,12 @@
     ],
     "menu_order": 0,
     "position": "normal",
-    "style": "default",
+    "style": "seamless",
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1757522727
+    "modified": 1788550155
 }

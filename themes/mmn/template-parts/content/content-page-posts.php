@@ -18,7 +18,10 @@
       <div class="site-width">
         <div class="content-page-posts-content">
           <div class="content-page-posts-header">
-            <h2 class="content-page-posts-title h2"><?php if ( $args['title'] ) { echo $args['title']; }; ?></h2>
+            <h2 class="content-page-posts-title h2">
+              <?php if ( $args['title'] ) { echo $args['title']; }; ?>
+            </h2>
+
             <?php if ( isset( $args['link'] ) ) : ?>
               <a class="content-page-posts-btn link" href="<?php echo $args['link']; ?>">Se alle</a>
             <?php endif; ?>
@@ -45,22 +48,29 @@
                   array( 'class' => 'content-page-posts-post content-page-posts-post-count-' . $count ),
                 );
               else :
-            ?>
-              <div class="content-page-posts-post sxs-item <?= 'content-page-posts-post-count-' . $count; ?> <?= get_post_type() . '-card' ?>">
-                <div class="ratio-container">
-                  <?php if ( has_post_thumbnail( get_the_ID() ) ) : 
-                    echo wp_get_attachment_image( get_post_thumbnail_id(), 'large', false, array( 'sizes' => $sizes ) ); 
-                  endif; ?>
+                $case_img_id = get_post_thumbnail_id() ?: null; 
+                
+                $case_card_img_id = get_field( 'case_card_img' ) ?: null;
+                
+                if ( $count > 0 && $case_card_img_id ) {
+                  $case_img_id = $case_card_img_id; 
+                } ?>
 
-                  <a class="pos:abs-cover" href="<?= get_permalink(); ?>"></a>
+                <div class="content-page-posts-post sxs-item <?= 'content-page-posts-post-count-' . $count; ?> <?= get_post_type() . '-card' ?>">
+                  <div class="ratio-container">
+                    <?php if ( $case_img_id ) : 
+                      echo wp_get_attachment_image( $case_img_id, 'large', false, array( 'sizes' => $sizes ) ); 
+                    endif; ?>
+
+                    <a class="pos:abs-cover" href="<?= get_permalink(); ?>"></a>
+                  </div>
+
+                  <p class="content-page-posts-post-title h3">
+                    <a href="<?php echo get_permalink(); ?>">
+                      <?php echo get_field('section_info_client') ?: get_the_title(); ?>
+                    </a>
+                  </p>
                 </div>
-
-                <p class="content-page-posts-post-title h3">
-                  <a href="<?php echo get_permalink(); ?>">
-                    <?php echo get_field('section_info_client') ?: get_the_title(); ?>
-                  </a>
-                </p>
-              </div>
               <?php endif;
               $count++;
               endforeach; 

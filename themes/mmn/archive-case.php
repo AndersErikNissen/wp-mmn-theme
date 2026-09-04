@@ -20,11 +20,14 @@
     <div class="sxs">
       <?php
         if ( have_posts() ) {
-          while ( have_posts() ) : the_post(); ?>
+          while ( have_posts() ) : 
+            the_post(); 
+            $case_img_id = get_field( 'case_card_img' ) ?: get_post_thumbnail_id() ?: null; ?>
+
             <div class="cases-case sxs-item case-card">
               <div class="ratio-container">
-                <?php if ( has_post_thumbnail( get_the_ID() ) ) : 
-                  echo wp_get_attachment_image( get_post_thumbnail_id(), 'large', false, array( 
+                <?php if ( $case_img_id ) : 
+                  echo wp_get_attachment_image( $case_img_id, 'large', false, array( 
                     'sizes' => '(max-width: 979px) 100vw, (max-width: 1899px) 33vw, 633px' 
                   ) ); 
                 endif; ?>
