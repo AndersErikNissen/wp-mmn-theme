@@ -48,7 +48,7 @@
                   array( 'class' => 'content-page-posts-post content-page-posts-post-count-' . $count ),
                 );
               else :
-                $case_img_id = get_post_thumbnail_id() ?: null; 
+                $case_img_id = get_field( 'case_card_img' ) ?: get_post_thumbnail_id() ?: null;
                 
                 $case_card_img_id = get_field( 'case_card_img' ) ?: null;
                 

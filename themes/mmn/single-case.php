@@ -159,8 +159,8 @@
             if ($i === 4) {
               $sizes = '(max-width: 1899px) 100vw, 1900px';
               $class .= ' case-image-wide';
-            }
-            ?>
+            } ?>
+            
             <div class="<?php echo $class; ?>">
               <div class="ratio-container">
                 <?php 
